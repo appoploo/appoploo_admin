@@ -1,0 +1,650 @@
+{
+  "int.": {
+    "en": "int.",
+    "el": "int."
+  },
+  "int.action-approve": {
+    "en": "Approve",
+    "el": "Έγκριση"
+  },
+  "int.action-delete": {
+    "en": "Delete",
+    "el": "Διαγραφή"
+  },
+  "int.action-export": {
+    "en": "Export",
+    "el": "Εξαγωγή"
+  },
+  "int.action-add": {
+    "en": "Add",
+    "el": "Προσθήκη"
+  },
+  "int.action-edit": {
+    "en": "Edit",
+    "el": "Επεξεργασία"
+  },
+  "int.actions": {
+    "en": "Actions",
+    "el": "Ενέργειες"
+  },
+  "int.aircraftpositions": {
+    "en": "Aircraft position",
+    "el": "Θέση αεροσκάφους"
+  },
+  "int.airlines": {
+    "en": "Airline",
+    "el": "Αερογραμμή"
+  },
+  "int.airport": {
+    "en": "Airport",
+    "el": "Αεροδρόμιο"
+  },
+  "int.all": {
+    "en": "All",
+    "el": "Όλα"
+  },
+  "int.all-airport": {
+    "en": "All",
+    "el": "Όλα"
+  },
+  "int.all-progress-will-lost-are-you-sure-you-want-to-leave": {
+    "en": "All progress will be lost. Do you want to proceed?",
+    "el": "Οι αλλαγές δε θα αποθηκευτούν. Συνέχεια;"
+  },
+  "int.all-status": {
+    "en": "All",
+    "el": "Όλα"
+  },
+  "int.all-submitted-by": {
+    "en": "All",
+    "el": "Όλοι"
+  },
+  "int.answer": {
+    "en": "Answer",
+    "el": "Απάντηση"
+  },
+  "int.answers": {
+    "en": "Result & comments",
+    "el": "Αποτέλεσμα & σχόλια"
+  },
+  "int.apply-filters": {
+    "en": "Apply filters",
+    "el": "Φιλτράρισμα"
+  },
+  "int.approve": {
+    "en": "Approve",
+    "el": "Έγκριση"
+  },
+  "int.approved": {
+    "en": "Approved",
+    "el": "Εγκεκριμένο"
+  },
+  "int.aprroved-at": {
+    "en": "Approved at",
+    "el": "Εγκρίθηκε"
+  },
+  "int.aprroved-by": {
+    "en": "Approved by",
+    "el": "Εγκρίθηκε από"
+  },
+  "int.area": {
+    "en": "Area",
+    "el": "Περιοχή"
+  },
+  "int.are-you-sure-you-want-to-delete-row?": {
+    "en": "Delete row? Action can't be undone",
+    "el": "Διαγραφή; Η ενέργεια είναι μη αναστρέψιμη"
+  },
+  "int.are-you-sure-you-want-to-delete-this-image": {
+    "en": "Delete image? Action can't be undone",
+    "el": "Διαγραφή φωτογραφίας; Η ενέργεια είναι μη αναστρέψιμη"
+  },
+  "int.are-you-sure-you-want-to-delete-this-report": {
+    "en": "Delete report? Action can't be undone",
+    "el": "Διαγραφή αναφοράς; Η ενέργεια είναι μη αναστρέψιμη"
+  },
+  "int.at": {
+    "en": "at",
+    "el": "στις"
+  },
+  "int.available": {
+    "en": "Available",
+    "el": "Διαθέσιμο"
+  },
+  "int.cancel": {
+    "en": "Cancel",
+    "el": "Ακύρωση"
+  },
+  "int.cancel-tooltip": {
+    "en": "Cancel",
+    "el": "Ακύρωση"
+  },
+  "int.check": {
+    "en": "Check",
+    "el": "Έλεγχος"
+  },
+  "int.checks": {
+    "en": "Checks",
+    "el": "Έλεγχοι"
+  },
+  "int.clear": {
+    "en": "Clear",
+    "el": "Καθαρισμός"
+  },
+  "int.close": {
+    "en": "Close",
+    "el": "Κλείσιμο"
+  },
+  "int.comments": {
+    "en": "Comments",
+    "el": "Σχόλια"
+  },
+  "int.conducted-at": {
+    "en": "Conducted at",
+    "el": "Διεξάγη"
+  },
+  "int.date": {
+    "en": "Date",
+    "el": "Ημερομηνία"
+  },
+  "int.delete": {
+    "en": "Delete",
+    "el": "Διαγραφή"
+  },
+  "int.description-el": {
+    "en": "Description (Ελληνικά)",
+    "el": "Περιγραφή (Ελληνικά)"
+  },
+  "int.description-en": {
+    "en": "Description (English)",
+    "el": "Περιγραφή (English)"
+  },
+  "int.edit": {
+    "en": "Edit",
+    "el": "Επεξεργασία"
+  },
+  "int.edit-answers": {
+    "en": "Edit the result or leave a comment.",
+    "el": "Αλλαγή αποτελέσματος και σχόλια"
+  },
+  "int.edit-view-delete-images": {
+    "en": "Add, edit or delete images",
+    "el": "Προσθαφαίρεση και επεξεργασία φωτογραφιών"
+  },
+  "int.el": {
+    "en": "Ελληνικά",
+    "el": "Ελληνικά"
+  },
+  "int.email": {
+    "en": "Email",
+    "el": "Email"
+  },
+  "int.en": {
+    "en": "English",
+    "el": "English"
+  },
+  "int.false": {
+    "en": "False",
+    "el": "Όχι"
+  },
+  "int.field": {
+    "en": "Field",
+    "el": "Το πεδίο"
+  },
+  "int.fields": {
+    "en": "Fields",
+    "el": "Πεδία"
+  },
+  "int.filter": {
+    "en": "Filter",
+    "el": "Φίλτρο"
+  },
+  "int.from": {
+    "en": "from",
+    "el": "από"
+  },
+  "int.i18n": {
+    "en": "int.i18n",
+    "el": "int.i18n"
+  },
+  "int.id": {
+    "en": "ID",
+    "el": "ID"
+  },
+  "int.images": {
+    "en": "Images",
+    "el": "Φωτογραφίες"
+  },
+  "int.key": {
+    "en": "int.key",
+    "el": "int.key"
+  },
+  "int.logout": {
+    "en": "Logout",
+    "el": "Αποσύνδεση"
+  },
+  "int.name": {
+    "en": "Name",
+    "el": "Όνομα"
+  },
+  "int.no": {
+    "en": "No",
+    "el": "Νο"
+  },
+  "int.no-images": {
+    "en": "No images",
+    "el": "Δεν υπάρχουν φωτογραφίες"
+  },
+  "int.no-records-to-display": {
+    "en": "No records to display",
+    "el": "Δεν υπάρχουν αποτελέσματα"
+  },
+  "int.observer": {
+    "en": "Observer",
+    "el": "Παρατηρητής"
+  },
+  "int.of": {
+    "en": "of",
+    "el": "από"
+  },
+  "int.operator-informed": {
+    "en": "Operator informed",
+    "el": "Ενημέρωση Χειριστή"
+  },
+  "int.operators": {
+    "en": "Operator",
+    "el": "Χειριστής"
+  },
+  "int.password": {
+    "en": "Password",
+    "el": "Κωδικός"
+  },
+  "int.pending": {
+    "en": "Pending approval",
+    "el": "Υπό έγκριση"
+  },
+  "int.questionnaires": {
+    "en": "Checklists",
+    "el": "Λίστες ελέγχου"
+  },
+  "int.registration": {
+    "en": "Registration",
+    "el": "Registration"
+  },
+  "int.reports": {
+    "en": "Reports",
+    "el": "Αναφορές"
+  },
+  "int.result": {
+    "en": "Result",
+    "el": "Αποτέλεσμα"
+  },
+  "int.row": {
+    "en": "Row",
+    "el": "Γραμμή"
+  },
+  "int.rows": {
+    "en": "Rows",
+    "el": "Γραμμές"
+  },
+  "int.safco": {
+    "en": "Safco",
+    "el": "Safco"
+  },
+  "int.save": {
+    "en": "Save",
+    "el": "Αποθήκευση"
+  },
+  "int.save-details": {
+    "en": "Save",
+    "el": "Αποθήκευση"
+  },
+  "int.save-tooltip": {
+    "en": "Save",
+    "el": "Αποθήκευση"
+  },
+  "int.score": {
+    "en": "Score",
+    "el": "Score"
+  },
+  "int.selected": {
+    "en": "Selected",
+    "el": "Επιλεγμένο"
+  },
+  "int.show-filters": {
+    "en": "Show filters",
+    "el": "Εμφάνιση φίλτρων"
+  },
+  "int.login": {
+    "en": "Login",
+    "el": "Σύνδεση"
+  },
+  "int.specific-fields": {
+    "en": "Form",
+    "el": "Φόρμα"
+  },
+  "int.status": {
+    "en": "Status",
+    "el": "Κατάσταση"
+  },
+  "int.submit": {
+    "en": "Submit",
+    "el": "Αποστολή"
+  },
+  "int.submitted-at": {
+    "en": "Submitted at",
+    "el": "Απεστάλη"
+  },
+  "int.submitted-by": {
+    "en": "Submitted by",
+    "el": "Απεστάλη από"
+  },
+  "int.to": {
+    "en": "to",
+    "el": "εώς"
+  },
+  "int.true": {
+    "en": "True",
+    "el": "Ναι"
+  },
+  "int.type": {
+    "en": "Type",
+    "el": "Είδος"
+  },
+  "int.update": {
+    "en": "Update",
+    "el": "Ενημέρωση"
+  },
+  "int.upload": {
+    "en": "Upload",
+    "el": "Μεταφόρτωση"
+  },
+  "int.username": {
+    "en": "Username",
+    "el": "Όνομα χρήστη"
+  },
+  "int.vehicles": {
+    "en": "Vehicle",
+    "el": "Όχημα"
+  },
+  "int.view": {
+    "en": "View",
+    "el": "Θέαση"
+  },
+  "int.warning": {
+    "en": "Warning",
+    "el": "Προσοχή"
+  },
+  "": {
+    "en": "",
+    "el": ""
+  },
+  "error.report.approve.operatorInformed": {
+    "en": "Operator not informed",
+    "el": "Ο χειριστής δεν έχει ενημερωθεί"
+  },
+  "error.report.check.comments.length": {
+    "en": "Length must be between 5 and 55 characters",
+    "el": "Επιτρέπονται 5 εώς 55 χαρακτήρες"
+  },
+  "error.report.check.missingInfo": {
+    "en": "Add comments and/or image(s)",
+    "el": "Προσθέστε σχόλιο ή/και φωτογραφία"
+  },
+  "error.field.required": {
+    "en": "Field is required",
+    "el": "Συμπληρώστε το πεδίο"
+  },
+  "name.el": {
+    "en": "Περιγραφή (Ελληνικά)",
+    "el": "Περιγραφή (Ελληνικά)"
+  },
+  "name.en": {
+    "en": "Description (English)",
+    "el": "Description (English)"
+  },
+  "int.menu.vehicles": {
+    "en": "Vehicles",
+    "el": "Οχήματα"
+  },
+  "int.menu.airlines": {
+    "en": "Airlines",
+    "el": "Αερογραμμές"
+  },
+  "int.menu.aircraft-positions": {
+    "en": "A/C positions",
+    "el": "Θέσεις αεροσκάφους"
+  },
+  "int.menu.operators": {
+    "en": "Operators",
+    "el": "Χειριστές"
+  },
+  "int.table.first-page": {
+    "en": "First Page",
+    "el": "Πρώτη Σελίδα"
+  },
+  "int.table.previous-page": {
+    "en": "Previous Page",
+    "el": "Προηγούμενη Σελίδα"
+  },
+  "int.table.next-page": {
+    "en": "Next Page",
+    "el": "Επόμενη Σελίδα"
+  },
+  "int.table.last-page": {
+    "en": "Last Page",
+    "el": "Τελευταία Σελίδα"
+  },
+  "int.show-columns": {
+    "en": "Show Columns",
+    "el": "Εμφάνιση Κολώνων"
+  },
+  "int.questionnaire-updated-successfully": {
+    "en": "Checklist updated successfully",
+    "el": "Η λίστα ελέγχου ενημερώθηκε επιτυχώς"
+  },
+  "int.report-updated-successfully": {
+    "en": "Report updated successfully",
+    "el": "Η αναφορά ενημερώθηκε επιτυχώς"
+  },
+  "int.vehicle-added-successfully": {
+    "en": "Vehicle added successfully",
+    "el": "Το όχημα προστέθηκε επιτυχώς"
+  },
+  "int.vehicle-updated-successfully": {
+    "en": "Vehicle updated successfully",
+    "el": "Το όχημα προστέθηκε επιτυχώς"
+  },
+  "int.vehicle-deleted-successfully": {
+    "en": "Vehicle deleted successfully",
+    "el": "Το όχημα διαγράφηκε επιτυχώς"
+  },
+  "int.airline-added-successfully": {
+    "en": "Airline added successfully",
+    "el": "Η αερογραμμή προστέθηκε επιτυχώς"
+  },
+  "int.airline-updated-successfully": {
+    "en": "Airline updated successfully",
+    "el": "Η αερογραμμή προστέθηκε επιτυχώς"
+  },
+  "int.airline-deleted-successfully": {
+    "en": "Airline deleted successfully",
+    "el": "Η αερογραμμή διαγράφηκε επιτυχώς"
+  },
+  "int.aircraft-added-successfully": {
+    "en": "Aircraft position added successfully",
+    "el": "Η θέση αεροσκάφους προστέθηκε επιτυχώς"
+  },
+  "int.aircraft-updated-successfully": {
+    "en": "Aircraft position updated successfully",
+    "el": "Η θέση αεροσκάφους προστέθηκε επιτυχώς"
+  },
+  "int.aircraft-deleted-successfully": {
+    "en": "Aircraft position deleted successfully",
+    "el": "Η θέση αεροσκάφους διαγράφηκε επιτυχώς"
+  },
+  "int.operator-added-successfully": {
+    "en": "Operator added successfully",
+    "el": "Ο χειριστής προστέθηκε επιτυχώς"
+  },
+  "int.operator-updated-successfully": {
+    "en": "Operator updated successfully",
+    "el": "Ο χειριστής προστέθηκε επιτυχώς"
+  },
+  "int.operator-deleted-successfully": {
+    "en": "Operator deleted successfully",
+    "el": "Ο χειριστής διαγράφηκε επιτυχώς"
+  },
+  "int.users": {
+    "en": "Users",
+    "el": "Χρήστες"
+  },
+  "int.role": {
+    "en": "Role",
+    "el": "Ρόλος"
+  },
+  "int.role": {
+    "en": "Role",
+    "el": "Ρόλος"
+  },
+  "int.all-role": {
+    "en": "All",
+    "el": "Όλοι"
+  },
+  "int.observer": {
+    "en": "Observer",
+    "el": "Παρατηρητής"
+  },
+  "int.observer_plus": {
+    "en": "Observer+",
+    "el": "Παρατηρητής+"
+  },
+  "int.admin": {
+    "en": "Administrator",
+    "el": "Διαχειριστής"
+  },
+  "int.created": {
+    "en": "Created",
+    "el": "Δημιουργήθηκε"
+  },
+  "int.invited": {
+    "en": "Invited",
+    "el": "Προσκλήθηκε"
+  },
+  "int.active": {
+    "en": "Active",
+    "el": "Ενεργός"
+  },
+  "int.disabled": {
+    "en": "Deactivated",
+    "el": "Απενεργοποιημένος"
+  },
+  "int.full-name": {
+    "en": "Name",
+    "el": "Όνομα"
+  },
+  "error.field.invalid": {
+    "en": "Invalid value",
+    "el": "Μη αποδεκτή τιμή"
+  },
+  "error.user.username.exists": {
+    "en": "Username exists",
+    "el": "Το όνομα χρήστη χρησιμοποιείται"
+  },
+  "error.user.email.exists": {
+    "en": "Email exists",
+    "el": "Το email χρησιμοποιείται"
+  },
+  "error.token.missing": {
+    "en": "Token is missing",
+    "el": "Δε βρέθηκε token"
+  },
+  "error.token.invalid": {
+    "en": "Token is not valid",
+    "el": "Το token δεν είναι έγκυρο"
+  },
+  "error.user.activate.badRequest": {
+    "en": "Bad request",
+    "el": "Μη αποδεκτό αίτημα"
+  },
+  "error.user.activate.activated": {
+    "en": "User is already active",
+    "el": "Ο χρήστης είναι ενεργός"
+  },
+  "error.user.disable.notActive": {
+    "en": "User is not active",
+    "el": "Ο χρήστης δεν είναι ενεργός"
+  },
+  "error.user.enable.notDisabled": {
+    "en": "User is not deactivated",
+    "el": "Ο χρήστης δεν είναι απενεργοποιημένος"
+  },
+  "error.user.password.forgot.notActive": {
+    "en": "User is not active",
+    "el": "Ο χρήστης δεν είναι ενεργός"
+  },
+  "error.user.password.reset.badRequest": {
+    "en": "Bad request",
+    "el": "Μη αποδεκτό αίτημα"
+  },
+  "error.user.password.reset.notActive": {
+    "en": "User is not active",
+    "el": "Ο χρήστης δεν είναι ενεργός"
+  },
+  "error.user.password.change.passwordMismatch": {
+    "en": "Password is wrong",
+    "el": "Μη αποδεκτή τιμή"
+  },
+  "error.user.password.change.notActive": {
+    "en": "User is not active",
+    "el": "Ο χρήστης δεν είναι ενεργός"
+  },
+  "int.add-user": {
+    "en": "Add user",
+    "el": "Νέος χρήστης"
+  },
+  "int.firstName": {
+    "en": "Name",
+    "el": "Όνομα"
+  },
+  "int.lastName": {
+    "en": "Surname",
+    "el": "Επίθετο"
+  },
+  "int.airports": {
+    "en": "Airports",
+    "el": "Αεροδρόμια"
+  },
+  "int.create": {
+    "en": "Create",
+    "el": "Δημιουργία"
+  },
+  "int.user-updated-successfully": {
+    "en": "User updated successfully",
+    "el": "Ο χρήστης ενημερώθηκε"
+  },
+  "int.invite-user": {
+    "en": "Invite user",
+    "el": "Ο χρήστης ενημερώθηκε"
+  },
+  "int.user": {
+    "en": "User",
+    "el": "Χρήστης"
+  },
+  "int.user-invited-successfully": {
+    "en": "User invited successfully",
+    "el": "Ο χρήστης προσκλήθηκε"
+  },
+  "int.welcome": {
+    "en": "Welcome",
+    "el": "Καλώς ορίσατε"
+  },
+  "int.register": {
+    "en": "Register",
+    "el": "Εγγραφή"
+  },
+  "int.retype-password": {
+    "en": "Confirm password",
+    "el": "Επιβεβαίωση κωδικού"
+  }
+}

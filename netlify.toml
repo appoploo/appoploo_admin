@@ -1,0 +1,25 @@
+
+[[redirects]]
+  from = "/api/*"
+  to = "http://34.67.167.154/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/uploads/*"
+  to = "http://34.67.167.154/uploads/:splat"
+  status = 200
+  force = true
+
+
+
+[[redirects]]
+  from = "/auth/*"
+  to = "http://34.67.167.154/auth/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
