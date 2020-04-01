@@ -9,7 +9,7 @@ import I18n from '../../../I18n';
 import Filters from '../../../components/Filters';
 import { FilterType } from '../../../components/Filters/types';
 import MaterialTable from '../../../components/Table';
-import { Button, Typography, IconButton } from '@material-ui/core';
+import { Button, Typography, IconButton, Dialog } from '@material-ui/core';
 import { Columns } from '../../../components/Table/types';
 import { Link, useHistory } from 'react-router-dom';
 import useApi from '../../../Hooks';
@@ -18,19 +18,33 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as R from 'ramda';
 import { toast } from 'react-toastify';
-import IconRepresentation from '../../../components/IconRepresentation';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import ImageIcon from '@material-ui/icons/Image';
+import QRcode from 'qrcode.react';
 import { css } from 'emotion';
 import { useSelector } from 'react-redux';
 import { IReduxStore } from '../../../redux/reducers';
 import { formatDate } from '../../../utils';
+import { makeStyles } from '@material-ui/styles';
 
 const URL = '/Appoploo2/vessels';
 
 const marginRight = css`
   margin-right: 15px !important;
 `;
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 'none'
+  },
+  paper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: 'transparent',
+    width: 'inherit',
+    maxWidth: 'unset'
+  }
+});
 
 function AllVessels() {
   const t = useContext(I18n);
@@ -39,7 +53,19 @@ function AllVessels() {
   const history = useHistory();
   const api = useApi();
 
+  const classes = useStyles();
+
   const tenant = useSelector((store: IReduxStore) => store.account.tenant);
+
+  const [code, setCode] = useState();
+
+  const handleClickOpen = (value: string) => {
+    setCode(value);
+  };
+
+  const handleClose = () => {
+    setCode(undefined);
+  };
 
   useEffect(() => {
     getVessels();
@@ -88,6 +114,11 @@ function AllVessels() {
       title: t('Vessel Type'),
       render: obj => `${R.pathOr('-', ['vesselType', 'vesselType'], obj)}`
     },
+
+    {
+      title: t('Length overall'),
+      render: obj => R.propOr('-', 'loa', obj)
+    },
     {
       title: t('Date Created'),
       render: obj => {
@@ -95,7 +126,6 @@ function AllVessels() {
         return formatDate(d.getTime());
       }
     },
-
     {
       title: t('Last Update'),
       render: obj => {
@@ -106,36 +136,51 @@ function AllVessels() {
 
     {
       title: t('actions'),
-      render: (obj: any, idx: number) => (
-        <>
-          <IconButton
-            classes={{ root: marginRight }}
-            size={'small'}
-            onClick={() => history.push(`/vessels/${obj._id}`)}
-            title={t('view')}>
-            <VisibilityIcon />
-          </IconButton>
+      render: (obj: any, idx: number) => {
+        const code: any = R.path(['devices', 0, 'deviceKey'], obj);
+        console.log(code);
+        return (
+          <>
+            <IconButton
+              classes={{ root: marginRight }}
+              size={'small'}
+              onClick={() => history.push(`/vessels/${obj._id}`)}
+              title={t('view')}>
+              <VisibilityIcon />
+            </IconButton>
 
-          <IconButton
-            classes={{ root: marginRight }}
-            size={'small'}
-            onClick={() => history.push(`/vessels/${obj._id}/edit`)}
-            title={t('edit')}>
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            classes={{ root: marginRight }}
-            size={'small'}
-            onClick={() => deleteVessel(obj._id)}
-            title={t('delete')}>
-            <DeleteIcon />
-          </IconButton>
-        </>
-      )
+            <IconButton
+              classes={{ root: marginRight }}
+              size={'small'}
+              onClick={() => handleClickOpen(code)}
+              title={t('show qr code')}>
+              <img
+                src="/images/qrScan.png"
+                alt=":)"
+                style={{ width: '25px' }}
+              />
+            </IconButton>
+
+            <IconButton
+              classes={{ root: marginRight }}
+              size={'small'}
+              onClick={() => history.push(`/vessels/${obj._id}/edit`)}
+              title={t('edit')}>
+              <EditIcon />
+            </IconButton>
+
+            <IconButton
+              classes={{ root: marginRight }}
+              size={'small'}
+              onClick={() => deleteVessel(obj._id)}
+              title={t('delete')}>
+              <DeleteIcon />
+            </IconButton>
+          </>
+        );
+      }
     }
   ];
-
-  console.log(vessels);
 
   return (
     <>
@@ -159,6 +204,10 @@ function AllVessels() {
         columns={columns}
         onChange={getVessels}
       />
+
+      <Dialog classes={classes} onClose={handleClose} open={Boolean(code)}>
+        {<QRcode size={500} value={code || ''} />}
+      </Dialog>
     </>
   );
 }
