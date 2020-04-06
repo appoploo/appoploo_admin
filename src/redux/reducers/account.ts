@@ -41,7 +41,7 @@ function auth(state: IAccount = initAccount, action: AnyAction) {
     case UPDATE_TOKEN:
       return {
         ...state,
-        ...decodeToken(action.payload.token, action.payload.refreshToken)
+        token: action.payload
       };
     default:
       return state;

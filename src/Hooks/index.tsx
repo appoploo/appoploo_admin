@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { IReduxStore } from '../redux/reducers';
 import { useSelector, useDispatch } from 'react-redux';
 import { setErrors } from '../redux/actions/errors';
@@ -12,55 +12,49 @@ function useApi() {
   const dispatch = useDispatch();
 
   const _setErr = useCallback(
-    errors => {
+    (errors) => {
       dispatch(setErrors(errors));
     },
     [dispatch]
   );
 
   const _updateToken = useCallback(
-    infos => {
-      dispatch(updateToken(infos));
+    (token) => {
+      console.log('asdasdsd');
+      dispatch(updateToken(token));
     },
     [dispatch]
   );
 
   const _logout = useCallback(() => dispatch(logout()), [dispatch]);
-
   const api = ky.extend({
     hooks: {
       beforeRequest: [
-        async request => {
-          if (!account.refreshToken) {
+        async (request) => {
+          if (!account.rTokenExp || !account.tokenExp) return;
+          request.headers.set('Content-Type', 'application/json');
+          request.headers.set('cache-control', 'no-cache,no-cache');
+          request.headers.set('X-Authorization', `Bearer ${account.token}`);
+          request.headers.set('tenant-id', `${account.tenant}`);
+
+          if (account?.rTokenExp < Date.now()) {
             _logout();
             return;
           }
 
-          if (account.tokenExp && account.tokenExp < Date.now()) {
-            const res = await ky.post('/auth/refresh-token', {
-              json: {
-                refreshToken: account.refreshToken
-              }
-            });
-            const infos = await res.json();
-            _updateToken(infos);
-            return request.headers.set(
-              'Authorization',
-              `Bearer ${infos.token}`
-            );
-          }
+          if (account?.tokenExp < Date.now()) {
+            const headers = {
+              'X-Authorization': `Bearer ${account.refreshToken}`,
+              'tenant-id': `${account.tenant}`
+            } as Record<string, any>;
 
-          if (!R.isEmpty(err)) _setErr({});
-          return request.headers.set(
-            'Authorization',
-            `Bearer ${account.token}`
-          );
-        }
-      ],
-      afterResponse: [
-        async (_request, _options, response) => {
-          const data = await response.json();
-          if ('error' in data) _setErr(data.error);
+            fetch('/Appoploo2/api/auth/token', { headers })
+              .then((res) => res.json())
+              .then((obj) => {
+                request.headers.set('X-Authorization', obj.token);
+                _updateToken(obj.token);
+              });
+          }
         }
       ]
     }

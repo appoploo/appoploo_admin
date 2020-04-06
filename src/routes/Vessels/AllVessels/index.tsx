@@ -13,7 +13,6 @@ import { Button, Typography, IconButton, Dialog } from '@material-ui/core';
 import { Columns } from '../../../components/Table/types';
 import { Link, useHistory } from 'react-router-dom';
 import useApi from '../../../Hooks';
-import queryString from 'query-string';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as R from 'ramda';
@@ -21,8 +20,6 @@ import { toast } from 'react-toastify';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import QRcode from 'qrcode.react';
 import { css } from 'emotion';
-import { useSelector } from 'react-redux';
-import { IReduxStore } from '../../../redux/reducers';
 import { formatDate } from '../../../utils';
 import { makeStyles } from '@material-ui/styles';
 
@@ -55,8 +52,6 @@ function AllVessels() {
 
   const classes = useStyles();
 
-  const tenant = useSelector((store: IReduxStore) => store.account.tenant);
-
   const [code, setCode] = useState();
 
   const handleClickOpen = (value: string) => {
@@ -72,16 +67,8 @@ function AllVessels() {
   }, []);
 
   async function getVessels() {
-    const headers: any = {
-      'Content-Type': 'application/json',
-      'cache-control': 'no-cache,no-cache',
-      'tenant-id': tenant
-    };
-
     try {
-      const res = await fetch(URL, {
-        headers
-      });
+      const res = await api.get(URL);
       const data = await res.json();
       setVessels(data);
     } catch (error) {
@@ -91,7 +78,6 @@ function AllVessels() {
 
   const deleteVessel = useCallback(
     (id: string) => {
-      const params = queryString.parse(history.location.search);
       api.delete(`/api/bo/vessels/${id}`);
       toast.success(t('vessel-delete-successfully'));
       getVessels();
@@ -108,27 +94,27 @@ function AllVessels() {
     },
     {
       title: t('description'),
-      render: obj => R.propOr('-', 'description', obj)
+      render: (obj) => R.propOr('-', 'description', obj)
     },
     {
       title: t('Vessel Type'),
-      render: obj => `${R.pathOr('-', ['vesselType', 'vesselType'], obj)}`
+      render: (obj) => `${R.pathOr('-', ['vesselType', 'vesselType'], obj)}`
     },
 
     {
       title: t('Length overall'),
-      render: obj => R.propOr('-', 'loa', obj)
+      render: (obj) => R.propOr('-', 'loa', obj)
     },
     {
       title: t('Date Created'),
-      render: obj => {
+      render: (obj) => {
         const d = new Date(obj.createdAt as Date);
         return formatDate(d.getTime());
       }
     },
     {
       title: t('Last Update'),
-      render: obj => {
+      render: (obj) => {
         const d = new Date(obj.updatedAt as Date);
         return formatDate(d.getTime());
       }
@@ -138,7 +124,6 @@ function AllVessels() {
       title: t('actions'),
       render: (obj: any, idx: number) => {
         const code: any = R.path(['devices', 0, 'deviceKey'], obj);
-        console.log(code);
         return (
           <>
             <IconButton

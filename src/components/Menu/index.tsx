@@ -75,7 +75,7 @@ function Menu(props: Props) {
       title: t('Vessels'),
       href: '/vessels',
       icon: <DirectionsBoatIcon />,
-      exact: true,
+      exact: false,
       perm: []
       //   perm: ['report:view']
     }
@@ -91,7 +91,7 @@ function Menu(props: Props) {
         <Profile />
         <Divider className={classes.divider} />
         <List>
-          {pages.map(page => (
+          {pages.map((page) => (
             <ListItem key={page.title} className={classes.item} disableGutters>
               <Button
                 exact={page.exact}
