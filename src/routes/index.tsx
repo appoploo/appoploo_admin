@@ -1,8 +1,9 @@
 import React from 'react';
-import { Switch, Redirect, Link } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import { Route, useHistory } from 'react-router';
 import NotFound from './NotFound';
 import Vessels from './Vessels';
+import Notifications from './Notifications';
 
 export function Render() {
   const history = useHistory();
@@ -18,6 +19,7 @@ const Routes = () => {
       <Route component={NotFound} exact path="/not-found" />
       <Route exact path="/" component={RedirectToVesseles} />
       <Route path="/vessels" component={Vessels} />
+      <Route path="/notifications" component={Notifications} />
       <Redirect to="/not-found" />
     </Switch>
   );

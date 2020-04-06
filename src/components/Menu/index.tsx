@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import Profile from './Profiles';
 import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
@@ -75,6 +76,14 @@ function Menu(props: Props) {
       title: t('Vessels'),
       href: '/vessels',
       icon: <DirectionsBoatIcon />,
+      exact: false,
+      perm: []
+      //   perm: ['report:view']
+    },
+    {
+      title: t('Notifications'),
+      href: '/notifications',
+      icon: <NotificationsIcon />,
       exact: false,
       perm: []
       //   perm: ['report:view']
