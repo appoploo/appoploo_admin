@@ -60,8 +60,8 @@ function ViewProduct() {
     if (!params.id) return;
     api
       .get(`/api/bo/products/${params.id}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const { name = '', price = 0, lpReward = 0, purchased = 0 } = data;
         const images = data.images.map((url: string) => ({
           url
@@ -80,7 +80,7 @@ function ViewProduct() {
 
   const keys = useMemo(
     () =>
-      Object.keys(infos).map(k => ({
+      Object.keys(infos).map((k) => ({
         label: t(`int.${k.toLocaleLowerCase()}`),
         value: R.propOr('', k, infos) as string
       })),

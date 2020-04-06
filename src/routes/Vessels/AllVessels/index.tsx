@@ -20,7 +20,6 @@ import {
 import { Columns } from '../../../components/Table/types';
 import { Link, useHistory } from 'react-router-dom';
 import useApi from '../../../Hooks';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as R from 'ramda';
 import { toast } from 'react-toastify';
@@ -29,6 +28,7 @@ import QRcode from 'qrcode.react';
 import { css } from 'emotion';
 import { formatDate } from '../../../utils';
 import { makeStyles } from '@material-ui/styles';
+import queryString from 'query-string';
 
 const URL = '/Appoploo2/vessels';
 
@@ -135,7 +135,7 @@ function AllVessels() {
             <IconButton
               classes={{ root: marginRight }}
               size={'small'}
-              onClick={() => history.push(`/vessels/${obj._id}`)}
+              onClick={() => history.push(`/vessels/${obj.id}`)}
               title={t('view')}>
               <VisibilityIcon />
             </IconButton>
@@ -174,6 +174,11 @@ function AllVessels() {
       }
     }
   ];
+  const params = useMemo(() => queryString.parse(history.location.search), [
+    history.location.search
+  ]);
+  const searchTerm: string = (params.searchTerm as string) || '';
+  const re = new RegExp(searchTerm, 'g');
 
   return (
     <>
@@ -192,7 +197,7 @@ function AllVessels() {
       <br />
       <Filters onSubmit={getVessels} filterConf={filterConf} />
       <MaterialTable
-        data={vessels}
+        data={vessels.filter((v: any) => v.name.match(re))}
         loading={loading}
         columns={columns}
         onChange={getVessels}
