@@ -107,7 +107,7 @@ function MaterialTable(props: Props) {
             }}
             className={cx(classes.textField, 'without-padding')}
             defaultValue={R.propOr('', 'searchTerm', params)}
-            onChange={evt => {
+            onChange={(evt) => {
               const searchTerm =
                 evt.currentTarget.value === ''
                   ? undefined

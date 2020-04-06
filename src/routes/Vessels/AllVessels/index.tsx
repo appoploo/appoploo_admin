@@ -9,7 +9,14 @@ import I18n from '../../../I18n';
 import Filters from '../../../components/Filters';
 import { FilterType } from '../../../components/Filters/types';
 import MaterialTable from '../../../components/Table';
-import { Button, Typography, IconButton, Dialog } from '@material-ui/core';
+import {
+  Button,
+  Typography,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogActions
+} from '@material-ui/core';
 import { Columns } from '../../../components/Table/types';
 import { Link, useHistory } from 'react-router-dom';
 import useApi from '../../../Hooks';
@@ -53,6 +60,7 @@ function AllVessels() {
   const classes = useStyles();
 
   const [code, setCode] = useState();
+  const [deleteModal, setDeleteModal] = useState();
 
   const handleClickOpen = (value: string) => {
     setCode(value);
@@ -76,14 +84,12 @@ function AllVessels() {
     }
   }
 
-  const deleteVessel = useCallback(
-    (id: string) => {
-      api.delete(`/api/bo/vessels/${id}`);
-      toast.success(t('vessel-delete-successfully'));
-      getVessels();
-    },
-    [history.location.search]
-  );
+  const deleteVessel = useCallback(async () => {
+    await api.delete(`/Appoploo2/api/rest/vessels//${deleteModal}`);
+    setDeleteModal(undefined);
+    toast.success(t('vessel-delete-successfully'));
+    await getVessels();
+  }, [history.location.search, deleteModal]);
 
   const filterConf = useMemo(() => [] as FilterType[], [t]);
 
@@ -134,30 +140,32 @@ function AllVessels() {
               <VisibilityIcon />
             </IconButton>
 
-            <IconButton
-              classes={{ root: marginRight }}
-              size={'small'}
-              onClick={() => handleClickOpen(code)}
-              title={t('show qr code')}>
-              <img
-                src="/images/qrScan.png"
-                alt=":)"
-                style={{ width: '25px' }}
-              />
-            </IconButton>
+            {code && (
+              <IconButton
+                classes={{ root: marginRight }}
+                size={'small'}
+                onClick={() => handleClickOpen(code)}
+                title={t('show qr code')}>
+                <img
+                  src="/images/qrScan.png"
+                  alt=":)"
+                  style={{ width: '25px' }}
+                />
+              </IconButton>
+            )}
 
-            <IconButton
+            {/* <IconButton
               classes={{ root: marginRight }}
               size={'small'}
               onClick={() => history.push(`/vessels/${obj._id}/edit`)}
               title={t('edit')}>
               <EditIcon />
-            </IconButton>
+            </IconButton> */}
 
             <IconButton
               classes={{ root: marginRight }}
               size={'small'}
-              onClick={() => deleteVessel(obj._id)}
+              onClick={() => setDeleteModal(obj.id)}
               title={t('delete')}>
               <DeleteIcon />
             </IconButton>
@@ -189,9 +197,24 @@ function AllVessels() {
         columns={columns}
         onChange={getVessels}
       />
+      <Dialog
+        open={Boolean(deleteModal)}
+        onClose={() => setDeleteModal(undefined)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title">
+          {'Are you sure you want to delete this vessel?'}
+        </DialogTitle>
 
+        <DialogActions>
+          <Button onClick={() => setDeleteModal(undefined)} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={deleteVessel}>Agree</Button>
+        </DialogActions>
+      </Dialog>
       <Dialog classes={classes} onClose={handleClose} open={Boolean(code)}>
-        {<QRcode size={500} value={code || ''} />}
+        {code && <QRcode size={500} value={code} />}
       </Dialog>
     </>
   );

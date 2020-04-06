@@ -3,7 +3,6 @@ import { IReduxStore } from '../redux/reducers';
 import { useSelector, useDispatch } from 'react-redux';
 import { setErrors } from '../redux/actions/errors';
 import { updateToken, logout } from '../redux/actions/account';
-import * as R from 'ramda';
 import ky from 'ky';
 
 function useApi() {
@@ -20,7 +19,6 @@ function useApi() {
 
   const _updateToken = useCallback(
     (token) => {
-      console.log('asdasdsd');
       dispatch(updateToken(token));
     },
     [dispatch]

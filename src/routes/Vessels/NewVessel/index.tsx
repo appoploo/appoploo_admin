@@ -18,6 +18,8 @@ import { makeStyles } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import useApi from '../../../Hooks';
 import { IReduxStore } from '../../../redux/reducers';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 type vesselType = 'Motor Yacht' | 'Sailing Yacht' | 'Catamaran' | 'Power boat';
 
@@ -77,6 +79,7 @@ function NewVessel() {
   });
 
   const api = useApi();
+  const history = useHistory();
 
   return (
     <>
@@ -87,7 +90,10 @@ function NewVessel() {
               .post(`/Appoploo2/api/rest/vessels`, {
                 json: { ...defaultValues, ...state }
               })
-              .then(console.log)
+              .then(() => {
+                toast.success(t('vessel-created-successfully'));
+                history.push('/vessels');
+              })
           }
           variant="outlined">
           {t('int.save')}

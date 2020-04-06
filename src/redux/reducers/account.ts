@@ -30,6 +30,18 @@ function decodeToken(token: string, refreshToken: string) {
   };
 }
 
+function decodeT(token: string) {
+  const { iat: tokenIat, exp: tokenExp, sub, iss, tenant } = JwtDecode(token);
+  return {
+    token,
+    sub,
+    iss,
+    tenant,
+    tokenIat: tokenIat * 1000,
+    tokenExp: tokenExp * 1000
+  };
+}
+
 function auth(state: IAccount = initAccount, action: AnyAction) {
   switch (action.type) {
     case LOGIN:
@@ -41,7 +53,7 @@ function auth(state: IAccount = initAccount, action: AnyAction) {
     case UPDATE_TOKEN:
       return {
         ...state,
-        token: action.payload
+        ...decodeT(action.payload)
       };
     default:
       return state;
