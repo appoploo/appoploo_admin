@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import FlightLandIcon from '@material-ui/icons/FlightLand';
-import { ListItemIcon } from '@material-ui/core';
+import { ListItemIcon, LinearProgress } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,17 +50,47 @@ function AlignItemsList(props: Props) {
                 <Icon />
               </ListItemIcon>
               <ListItemText
-                primary={`${notf.vesselName} ${msg}`}
-                secondary={
-                  <React.Fragment>
+                primary={
+                  <>
                     <Typography
                       component="span"
-                      variant="body2"
+                      variant="h6"
                       className={classes.inline}
                       color="textPrimary">
-                      {notf.geoObjectName}
+                      {notf.vesselName}{' '}
                     </Typography>
-                  </React.Fragment>
+                    <Typography
+                      component="span"
+                      style={{ marginRight: '5px' }}
+                      color="textSecondary">
+                      {msg}
+                    </Typography>
+
+                    <Typography
+                      component="span"
+                      variant="h6"
+                      className={classes.inline}
+                      color="textPrimary">
+                      {notf.geoObjectName}{' '}
+                    </Typography>
+                  </>
+                }
+                secondary={
+                  <>
+                    <Typography
+                      component="span"
+                      style={{ marginRight: '5px' }}
+                      color="textSecondary">
+                      at
+                    </Typography>
+                    <Typography
+                      component="span"
+                      variant="h6"
+                      className={classes.inline}
+                      color="textPrimary">
+                      <strong>{notf.dateText}</strong>
+                    </Typography>
+                  </>
                 }
               />
             </ListItem>
@@ -70,7 +100,9 @@ function AlignItemsList(props: Props) {
       })}
     </List>
   ) : (
-    <></>
+    <>
+      <LinearProgress color="secondary" />
+    </>
   );
 }
 export default AlignItemsList;

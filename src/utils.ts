@@ -1,18 +1,18 @@
 import { format } from 'date-fns';
 
 export const formatDate = (date?: Date | number) =>
-  date ? format(+date, 'd MMM yyy, hh:mm') : '';
+  date ? format(+date, 'd MMM yyy') : '';
 
 export const debounce = (func: any, wait: any, immediate?: any) => {
   let timeout: any;
 
-  return function(...args: any) {
+  return function (...args: any) {
     //@ts-ignore
     let context = this;
 
     clearTimeout(timeout);
 
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       timeout = null;
 
       if (!immediate) {

@@ -78,20 +78,20 @@ function Filters(props: Props) {
   const t = useContext(I18n);
 
   const handleChangeValue = useCallback((obj: Record<string, any>) => {
-    setState(s => ({ ...s, ...obj }));
+    setState((s) => ({ ...s, ...obj }));
   }, []);
 
   useEffect(() => {
     const params = queryString.parse(history.location.search);
     const keys = props.filterConf
-      .map(obj =>
+      .map((obj) =>
         obj.type === 'date'
           ? [obj.keyNameFrom, obj.keyNameTo]
           : obj.type === 'range'
           ? [obj.keyNameMin, obj.keyNameMax]
           : obj.keyName
       )
-      .flatMap(e => e);
+      .flatMap((e) => e);
     const newState = keys.reduce(
       (acc, curr) => ({
         ...acc,
@@ -101,6 +101,11 @@ function Filters(props: Props) {
     );
     setState(newState);
   }, [open, history]);
+
+  useEffect(() => {
+    const { from, to } = queryString.parse(history.location.search);
+    setState({ from: from && +from, to: to && +to });
+  }, []);
 
   function getComponent(obj: FilterType) {
     switch (obj.type) {
@@ -112,7 +117,9 @@ function Filters(props: Props) {
             select
             margin="dense"
             value={state[obj.keyName] || ''}
-            onChange={e => handleChangeValue({ [obj.keyName]: e.target.value })}
+            onChange={(e) =>
+              handleChangeValue({ [obj.keyName]: e.target.value })
+            }
             variant="outlined">
             {obj.options.map((obj, idx) => (
               <MenuItem key={idx} value={obj.value}>
@@ -131,7 +138,7 @@ function Filters(props: Props) {
               margin="dense"
               label={obj.labelMin}
               value={state[obj.keyNameMin] || ''}
-              onChange={e =>
+              onChange={(e) =>
                 handleChangeValue({ [obj.keyNameMin]: e.target.value })
               }
               variant="outlined"
@@ -143,7 +150,7 @@ function Filters(props: Props) {
               margin="dense"
               label={obj.labelMax}
               value={state[obj.keyNameMax] || ''}
-              onChange={e =>
+              onChange={(e) =>
                 handleChangeValue({ [obj.keyNameMax]: e.target.value })
               }
               variant="outlined"
@@ -162,7 +169,7 @@ function Filters(props: Props) {
 
         return (
           <Calendar
-            onChange={dates => {
+            onChange={(dates) => {
               const d = dates as Date[];
               const from = d[0].getTime();
               const to = d[1].getTime();
@@ -184,7 +191,9 @@ function Filters(props: Props) {
             type="number"
             margin="dense"
             value={state[obj.keyName] || ''}
-            onChange={e => handleChangeValue({ [obj.keyName]: e.target.value })}
+            onChange={(e) =>
+              handleChangeValue({ [obj.keyName]: e.target.value })
+            }
             variant="outlined"
           />
         );
@@ -221,7 +230,7 @@ function Filters(props: Props) {
   const filtersInfo = useMemo(
     () =>
       props.filterConf
-        .map(obj => {
+        .map((obj) => {
           return obj.type === 'date'
             ? [
                 {
@@ -243,8 +252,8 @@ function Filters(props: Props) {
               ]
             : { label: [obj.label], value: state[obj.keyName] };
         })
-        .flatMap(e => e),
-    [history.location]
+        .flatMap((e) => e),
+    [history.location, state]
   );
 
   return (

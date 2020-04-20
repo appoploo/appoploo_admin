@@ -10,7 +10,9 @@ import { makeStyles } from '@material-ui/styles';
 import Profile from './Profiles';
 import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import { subWeeks } from 'date-fns/esm';
 
+const defaultFrom = subWeeks(Date.now(), 4).getTime();
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
     height: 'calc(100% - 64px)',
@@ -82,7 +84,7 @@ function Menu(props: Props) {
     },
     {
       title: t('Notifications'),
-      href: '/notifications',
+      href: `/notifications?from=${defaultFrom}&to=${Date.now()}`,
       icon: <NotificationsIcon />,
       exact: false,
       perm: []

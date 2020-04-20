@@ -8,27 +8,11 @@ import React, {
 import I18n from '../../I18n';
 import Filters from '../../components/Filters';
 import { FilterType } from '../../components/Filters/types';
-import MaterialTable from '../../components/Table';
-import {
-  Button,
-  Typography,
-  IconButton,
-  Dialog,
-  DialogTitle,
-  DialogActions
-} from '@material-ui/core';
-import { Columns } from '../../components/Table/types';
-import { Link, useHistory } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import useApi from '../../Hooks';
-import DeleteIcon from '@material-ui/icons/Delete';
-import * as R from 'ramda';
-import { toast } from 'react-toastify';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import QRcode from 'qrcode.react';
-import { css } from 'emotion';
-import { formatDate } from '../../utils';
-import { makeStyles } from '@material-ui/styles';
 import queryString from 'query-string';
+
 import AlignItemsList from '../../components/List';
 
 const URL = 'Appoploo2/notifications';
@@ -42,8 +26,7 @@ function AllVessels() {
 
   const getNotf = useCallback(
     (search?: string) => {
-      console.log(history.location.search);
-      const params = Boolean(search) ? search : history.location.search;
+      const params = Boolean(search) ? `?${search}` : history.location.search;
       api
         .get(`${URL}${params}`)
         .then((e) => e.json())
@@ -54,12 +37,16 @@ function AllVessels() {
 
   useEffect(() => {
     getNotf();
-  }, [history.location.search]);
-
+  }, []);
   const filterConf = useMemo(
     () =>
       [
-        { label: 'from-to', keyNameTo: 'to', keyNameFrom: 'from', type: 'date' }
+        {
+          label: 'from - to',
+          keyNameTo: 'to',
+          keyNameFrom: 'from',
+          type: 'date'
+        }
       ] as FilterType[],
     [t]
   );
@@ -75,7 +62,10 @@ function AllVessels() {
         <Typography variant="h4">{t('Notifications')}</Typography>
       </div>
       <br />
-      <Filters onSubmit={console.log} filterConf={filterConf} />
+      <Filters
+        onSubmit={(obj) => getNotf(queryString.stringify(obj))}
+        filterConf={filterConf}
+      />
       <AlignItemsList data={notf} />
     </>
   );
