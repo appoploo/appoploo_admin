@@ -5,6 +5,7 @@ import NotFound from './NotFound';
 import Vessels from './Vessels';
 import Notifications from './Notifications';
 import Boundaries from './Boundaries';
+import Map from './Map';
 
 export function Render() {
   const history = useHistory();
@@ -22,6 +23,7 @@ const Routes = () => {
       <Route path="/vessels" component={Vessels} />
       <Route path="/notifications" component={Notifications} />
       <Route path="/boundaries" component={Boundaries} />
+      <Route path="/map" component={Map} />
       <Redirect to="/not-found" />
     </Switch>
   );

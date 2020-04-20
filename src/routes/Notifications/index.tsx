@@ -8,7 +8,7 @@ import React, {
 import I18n from '../../I18n';
 import Filters from '../../components/Filters';
 import { FilterType } from '../../components/Filters/types';
-import { Typography, Button } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import useApi from '../../Hooks';
 import queryString from 'query-string';

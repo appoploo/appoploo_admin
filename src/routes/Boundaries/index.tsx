@@ -45,10 +45,21 @@ function Boundaries() {
     const group = Leaflet.featureGroup().addTo(_map);
     setGroup(group);
     setMap(_map);
+
+    _map.on(Leaflet.Draw.Event.DRAWSTART, (e) => {
+      setLatLngs([]);
+      group.clearLayers();
+    });
+
+    _map.on(Leaflet.Draw.Event.DELETESTART, (e) => {
+      setLatLngs([]);
+      group.clearLayers();
+    });
   }, []);
 
   useEffect(() => {
     if (!map || !latLngs.length || !group) return;
+    console.log(latLngs);
     const polygon = Leaflet.polygon(latLngs).addTo(group);
     // zoom the map to the polygon
     map.fitBounds(polygon.getBounds());
@@ -65,7 +76,7 @@ function Boundaries() {
         }}>
         <Typography variant="h4">{t('Boundaries')}</Typography>
 
-        <Button variant="contained">{t('set boundaries')}</Button>
+        <Button variant="contained">{t('save')}</Button>
       </div>
 
       <Card elevation={4} className={mapClass} id="mapid" />

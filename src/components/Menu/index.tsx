@@ -11,6 +11,7 @@ import Profile from './Profiles';
 import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MapIcon from '@material-ui/icons/Map';
+import SettingsIcon from '@material-ui/icons/Settings';
 import { subWeeks } from 'date-fns/esm';
 
 const defaultFrom = subWeeks(Date.now(), 4).getTime();
@@ -84,6 +85,14 @@ function Menu(props: Props) {
       //   perm: ['report:view']
     },
     {
+      title: t('Map'),
+      href: `/map`,
+      icon: <MapIcon />,
+      exact: false,
+      perm: []
+      //   perm: ['report:view']
+    },
+    {
       title: t('Notifications'),
       href: `/notifications?from=${defaultFrom}&to=${Date.now()}`,
       icon: <NotificationsIcon />,
@@ -95,7 +104,7 @@ function Menu(props: Props) {
     {
       title: t('Boundaries'),
       href: `/boundaries`,
-      icon: <MapIcon />,
+      icon: <SettingsIcon />,
       exact: false,
       perm: []
       //   perm: ['report:view']

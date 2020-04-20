@@ -15,7 +15,9 @@ import {
   IconButton,
   Dialog,
   DialogTitle,
-  DialogActions
+  DialogActions,
+  useMediaQuery,
+  Theme
 } from '@material-ui/core';
 import { Columns } from '../../../components/Table/types';
 import { Link, useHistory } from 'react-router-dom';
@@ -90,6 +92,7 @@ function AllVessels() {
     toast.success(t('vessel-delete-successfully'));
     await getVessels();
   }, [history.location.search, deleteModal]);
+  const isMd = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
   const filterConf = useMemo(() => [] as FilterType[], [t]);
 
@@ -135,7 +138,9 @@ function AllVessels() {
             <IconButton
               classes={{ root: marginRight }}
               size={'small'}
-              onClick={() => history.push(`/vessels/${obj.id}`)}
+              onClick={() =>
+                history.push(`/map?selected=${obj.id}${isMd ? '#mapid' : '#'}`)
+              }
               title={t('view')}>
               <VisibilityIcon />
             </IconButton>
@@ -153,14 +158,6 @@ function AllVessels() {
                 />
               </IconButton>
             )}
-
-            {/* <IconButton
-              classes={{ root: marginRight }}
-              size={'small'}
-              onClick={() => history.push(`/vessels/${obj._id}/edit`)}
-              title={t('edit')}>
-              <EditIcon />
-            </IconButton> */}
 
             <IconButton
               classes={{ root: marginRight }}
