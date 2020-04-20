@@ -4,13 +4,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import FlightLandIcon from '@material-ui/icons/FlightLand';
-import { ListItemIcon, LinearProgress } from '@material-ui/core';
+import { ListItemIcon } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -100,9 +98,7 @@ function AlignItemsList(props: Props) {
       })}
     </List>
   ) : (
-    <>
-      <LinearProgress color="secondary" />
-    </>
+    <></>
   );
 }
 export default AlignItemsList;
