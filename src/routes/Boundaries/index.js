@@ -5,6 +5,8 @@ import { mapClass } from './css';
 import { Button, Typography, Card } from '@material-ui/core';
 
 import I18n from '../../I18n';
+import useApi from '../../Hooks';
+import { json } from 'd3';
 
 const GreceCoords = {
   lat: 37.98381,
@@ -15,6 +17,20 @@ function Boundaries() {
   const [latLngs, setLatLngs] = useState([]);
   const [map, setMap] = useState();
   const [group, setGroup] = useState();
+
+  const api = useApi();
+
+  const save = () =>
+    api.post('/geoobjects/persist', {
+      json: {
+        name: 'Test',
+        geometry: {
+          type: 'MultiPoint',
+          coordinates: latLngs.map((obj) => [obj.lng, obj.lat])
+        },
+        category: 'GEOFENCE_REGION'
+      }
+    });
 
   useEffect(() => {
     const _map = Leaflet.map('mapid', {
@@ -79,7 +95,9 @@ function Boundaries() {
         }}>
         <Typography variant="h4">{t('Boundaries')}</Typography>
 
-        <Button variant="contained">{t('save')}</Button>
+        <Button onClick={save} variant="contained">
+          {t('save')}
+        </Button>
       </div>
 
       <Card elevation={4} className={mapClass} id="mapid" />

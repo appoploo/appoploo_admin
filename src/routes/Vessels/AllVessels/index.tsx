@@ -87,7 +87,7 @@ function AllVessels() {
   }
 
   const deleteVessel = useCallback(async () => {
-    await api.delete(`/Appoploo2/api/rest/vessels//${deleteModal}`);
+    await api.delete(`/Appoploo2/api/rest/vessels/${deleteModal}`);
     setDeleteModal(undefined);
     toast.success(t('vessel-delete-successfully'));
     await getVessels();
