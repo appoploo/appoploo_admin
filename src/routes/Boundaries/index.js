@@ -1,8 +1,9 @@
 import React, { useEffect, useContext, useState } from 'react';
 
-import Leaflet, { LatLng } from 'leaflet';
+import Leaflet from 'leaflet';
 import { mapClass } from './css';
 import { Button, Typography, Card } from '@material-ui/core';
+
 import I18n from '../../I18n';
 
 const GreceCoords = {
@@ -11,15 +12,15 @@ const GreceCoords = {
 };
 
 function Boundaries() {
-  const [latLngs, setLatLngs] = useState<LatLng[]>([]);
-  const [map, setMap] = useState<Leaflet.DrawMap>();
-  const [group, setGroup] = useState<Leaflet.FeatureGroup<any>>();
+  const [latLngs, setLatLngs] = useState([]);
+  const [map, setMap] = useState();
+  const [group, setGroup] = useState();
 
   useEffect(() => {
-    const _map = Leaflet.map('mapid').setView(
-      [GreceCoords.lat, GreceCoords.lng],
-      7
-    );
+    const _map = Leaflet.map('mapid', {
+      editable: true,
+      doubleClickZoom: false
+    }).setView([GreceCoords.lat, GreceCoords.lng], 7);
     Leaflet.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {}
@@ -28,6 +29,11 @@ function Boundaries() {
     // FeatureGroup is to store editable layers
     const drawnItems = new Leaflet.FeatureGroup();
     _map.addLayer(drawnItems);
+
+    const group = Leaflet.featureGroup().addTo(_map);
+    setGroup(group);
+    setMap(_map);
+
     const drawControl = new Leaflet.Control.Draw({
       position: 'topright',
       draw: {
@@ -35,6 +41,10 @@ function Boundaries() {
         marker: false,
         circlemarker: false,
         circle: false
+      },
+      edit: {
+        featureGroup: group,
+        remove: true
       }
     });
     _map.addControl(drawControl);
@@ -42,18 +52,11 @@ function Boundaries() {
     _map.on(Leaflet.Draw.Event.CREATED, (e) => {
       setLatLngs(e.layer.getLatLngs());
     });
-    const group = Leaflet.featureGroup().addTo(_map);
-    setGroup(group);
-    setMap(_map);
 
-    _map.on(Leaflet.Draw.Event.DRAWSTART, (e) => {
-      setLatLngs([]);
-      group.clearLayers();
-    });
-
-    _map.on(Leaflet.Draw.Event.DELETESTART, (e) => {
-      setLatLngs([]);
-      group.clearLayers();
+    _map.on('draw:edited', function (e) {
+      const coords = e.layers.toGeoJSON().features[0]?.geometry?.coordinates[0];
+      if (coords)
+        setLatLngs(coords.map((arr) => ({ lat: arr[1], lng: arr[0] })));
     });
   }, []);
 
