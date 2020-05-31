@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 
 export const formatDate = (date?: Date | number) =>
-  date ? format(+date, 'd MMM yyy') : '';
+  date ? format(+date, 'd MMM yyy') : '-';
 
 export const debounce = (func: any, wait: any, immediate?: any) => {
   let timeout: any;

@@ -32,7 +32,7 @@ import { formatDate } from '../../../utils';
 import { makeStyles } from '@material-ui/styles';
 import queryString from 'query-string';
 
-const URL = '/Appoploo2/vessels';
+const URL = '/Appoploo2/boundaries';
 
 const marginRight = css`
   margin-right: 15px !important;
@@ -52,47 +52,43 @@ const useStyles = makeStyles({
   }
 });
 
-function AllVessels() {
+function AllBoundaries() {
   const t = useContext(I18n);
-  const [vessels, setVessels] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [boundaries, setBoundaries] = useState<any>([]);
   const history = useHistory();
   const api = useApi();
-
-  const classes = useStyles();
-
-  const [code, setCode] = useState();
   const [deleteModal, setDeleteModal] = useState();
 
-  const handleClickOpen = (value: string) => {
-    setCode(value);
-  };
-
-  const handleClose = () => {
-    setCode(undefined);
-  };
+  const getGeoObj = () =>
+    api
+      .get('/Appoploo2/geoobjects')
+      .json()
+      .then((data) => setBoundaries(data))
+      .catch(async (e) => console.log(await e.response.json()));
 
   useEffect(() => {
-    getVessels();
+    getGeoObj();
   }, []);
 
-  async function getVessels() {
+  const deleteGeo = () => {
+    api
+      .delete(`/Appoploo2/geoobjects/${deleteGeo}`)
+      .then(() => {
+        toast.success(t('boundaries-deleted-successfully'));
+        getGeoObj();
+      })
+      .catch(async (e) => console.log(await e.response.json()));
+    setDeleteModal(undefined);
+  };
+  async function getboundaries() {
     try {
-      const res = await api.get(URL);
+      const res = await api.get('/Appoploo2/geoobjects');
       const data = await res.json();
-      setVessels(data);
+      setBoundaries(data);
     } catch (error) {
       console.error(error);
     }
   }
-
-  const deleteVessel = useCallback(async () => {
-    await api.delete(`/Appoploo2/api/rest/vessels/${deleteModal}`);
-    setDeleteModal(undefined);
-    toast.success(t('vessel-delete-successfully'));
-    await getVessels();
-  }, [history.location.search, deleteModal]);
-  const isMd = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
   const filterConf = useMemo(() => [] as FilterType[], [t]);
 
@@ -101,18 +97,10 @@ function AllVessels() {
       title: t('name'),
       field: 'name'
     },
-    {
-      title: t('description'),
-      render: (obj) => R.propOr('-', 'description', obj)
-    },
-    {
-      title: t('Vessel Type'),
-      render: (obj) => `${R.pathOr('-', ['vesselType', 'vesselType'], obj)}`
-    },
 
     {
-      title: t('Length overall'),
-      render: (obj) => R.propOr('-', 'loa', obj)
+      title: t('category'),
+      field: 'category'
     },
     {
       title: t('Date Created'),
@@ -122,42 +110,17 @@ function AllVessels() {
       }
     },
     {
-      title: t('Last Update'),
-      render: (obj) => {
-        const d = new Date(obj.updatedAt as Date);
-        return formatDate(d.getTime());
-      }
-    },
-
-    {
       title: t('actions'),
       render: (obj: any, idx: number) => {
-        const code: any = R.path(['devices', 0, 'deviceKey'], obj);
         return (
           <>
             <IconButton
               classes={{ root: marginRight }}
               size={'small'}
-              onClick={() =>
-                history.push(`/map?selected=${obj.id}${isMd ? '#mapid' : '#'}`)
-              }
+              onClick={() => history.push(`/boundaries/${obj.id}`)}
               title={t('view')}>
               <VisibilityIcon />
             </IconButton>
-
-            {code && (
-              <IconButton
-                classes={{ root: marginRight }}
-                size={'small'}
-                onClick={() => handleClickOpen(code)}
-                title={t('show qr code')}>
-                <img
-                  src="/images/qrScan.png"
-                  alt=":)"
-                  style={{ width: '25px' }}
-                />
-              </IconButton>
-            )}
 
             <IconButton
               classes={{ root: marginRight }}
@@ -175,7 +138,7 @@ function AllVessels() {
     history.location.search
   ]);
   const searchTerm: string = (params.searchTerm as string) || '';
-  const re = new RegExp(searchTerm, 'g');
+  const re = new RegExp(searchTerm.toLocaleLowerCase(), 'g');
 
   return (
     <>
@@ -185,19 +148,20 @@ function AllVessels() {
           alignItems: 'flex-end',
           justifyContent: 'space-between'
         }}>
-        <Typography variant="h4">{t('Vessels')}</Typography>
+        <Typography variant="h4">{t('boundaries')}</Typography>
 
-        <Button component={Link} to="/vessels/new" variant="contained">
+        <Button component={Link} to="/boundaries/new" variant="contained">
           {t('add-new')}
         </Button>
       </div>
       <br />
-      <Filters onSubmit={getVessels} filterConf={filterConf} />
+      <Filters onSubmit={getboundaries} filterConf={filterConf} />
       <MaterialTable
-        data={vessels.filter((v: any) => v.name.toLowerCase().match(re))}
-        loading={loading}
+        data={boundaries.filter((v: any) =>
+          v.name.toLocaleLowerCase().match(re)
+        )}
         columns={columns}
-        onChange={getVessels}
+        onChange={getboundaries}
       />
       <Dialog
         open={Boolean(deleteModal)}
@@ -205,21 +169,18 @@ function AllVessels() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">
-          {'Are you sure you want to delete this vessel?'}
+          {'Are you sure you want to delete this boundary?'}
         </DialogTitle>
 
         <DialogActions>
           <Button onClick={() => setDeleteModal(undefined)} color="primary">
             Disagree
           </Button>
-          <Button onClick={deleteVessel}>Agree</Button>
+          <Button onClick={deleteGeo}>Agree</Button>
         </DialogActions>
-      </Dialog>
-      <Dialog classes={classes} onClose={handleClose} open={Boolean(code)}>
-        {code && <QRcode size={500} value={code} />}
       </Dialog>
     </>
   );
 }
 
-export default AllVessels;
+export default AllBoundaries;
