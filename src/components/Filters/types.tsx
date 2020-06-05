@@ -7,12 +7,12 @@ export type SelectFilter = {
   keyName: string;
   options: Option[];
   label: string;
+  setLabelValue: (e: string) => string;
   type: 'select';
 };
 
 export type DateFilter = {
   label: string;
-  keyNameTo: string;
   keyNameFrom: string;
   type: 'date';
 };

@@ -16,13 +16,24 @@ import queryString from 'query-string';
 import AlignItemsList from '../../components/List';
 
 const URL = 'Appoploo2/notifications';
+const VESSELS_URL = '/Appoploo2/vessels';
 
 function AllVessels() {
   const t = useContext(I18n);
   const history = useHistory();
   const api = useApi();
-
+  const [vessels, setVessels] = useState([]);
   const [notf, setNotf] = useState([]);
+
+  async function getVessels() {
+    try {
+      const res = await api.get(VESSELS_URL);
+      const data = await res.json();
+      setVessels(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const getNotf = useCallback(
     (search?: string) => {
@@ -37,18 +48,36 @@ function AllVessels() {
 
   useEffect(() => {
     getNotf();
+    getVessels();
   }, []);
+
   const filterConf = useMemo(
     () =>
       [
         {
-          label: 'from - to',
-          keyNameTo: 'to',
+          label: 'from',
           keyNameFrom: 'from',
           type: 'date'
+        },
+        {
+          keyName: 'vesselId',
+          options: [
+            { label: 'All', value: 'All' },
+            ...vessels.map((obj: any) => ({
+              value: obj.id,
+              label: obj.name
+            }))
+          ],
+          setLabelValue: (id) => {
+            const found: any = vessels.find((obj: any) => +obj.id === +id);
+            return `${found?.name ?? 'All'}`;
+          },
+          label: 'vessel',
+          type: 'select'
         }
       ] as FilterType[],
-    [t]
+
+    [t, vessels]
   );
 
   return (

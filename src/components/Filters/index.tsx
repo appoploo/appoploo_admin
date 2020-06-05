@@ -27,7 +27,6 @@ import { FilterType } from './types';
 import { useHistory } from 'react-router-dom';
 import { formatDate } from '../../utils';
 import { cx } from 'emotion';
-import { letterSpacing } from '@material-ui/system';
 
 const useStyles = makeStyles((theme: Theme) => ({
   list: {
@@ -83,29 +82,8 @@ function Filters(props: Props) {
 
   useEffect(() => {
     const params = queryString.parse(history.location.search);
-    const keys = props.filterConf
-      .map((obj) =>
-        obj.type === 'date'
-          ? [obj.keyNameFrom, obj.keyNameTo]
-          : obj.type === 'range'
-          ? [obj.keyNameMin, obj.keyNameMax]
-          : obj.keyName
-      )
-      .flatMap((e) => e);
-    const newState = keys.reduce(
-      (acc, curr) => ({
-        ...acc,
-        [curr]: params[curr]
-      }),
-      {}
-    );
-    setState(newState);
+    setState(params);
   }, [open, history]);
-
-  useEffect(() => {
-    const { from, to } = queryString.parse(history.location.search);
-    setState({ from: from && +from, to: to && +to });
-  }, []);
 
   function getComponent(obj: FilterType) {
     switch (obj.type) {
@@ -116,9 +94,11 @@ function Filters(props: Props) {
             fullWidth
             select
             margin="dense"
-            value={state[obj.keyName] || ''}
+            value={state[obj.keyName] || 'All'}
             onChange={(e) =>
-              handleChangeValue({ [obj.keyName]: e.target.value })
+              e.target.value === 'All'
+                ? handleChangeValue({ [obj.keyName]: undefined })
+                : handleChangeValue({ [obj.keyName]: e.target.value })
             }
             variant="outlined">
             {obj.options.map((obj, idx) => (
@@ -159,27 +139,20 @@ function Filters(props: Props) {
         );
 
       case 'date':
-        const dateValues =
-          state[obj.keyNameFrom] && state[obj.keyNameTo]
-            ? [
-                new Date(+state[obj.keyNameFrom]),
-                new Date(+state[obj.keyNameTo])
-              ]
-            : undefined;
+        const dateValues = state[obj.keyNameFrom]
+          ? [new Date(+state[obj.keyNameFrom])]
+          : undefined;
 
         return (
           <Calendar
-            onChange={(dates) => {
-              const d = dates as Date[];
-              const from = d[0].getTime();
-              const to = d[1].getTime();
+            onChange={(date) => {
+              console.log(date);
+              const d = new Date(date as Date).getTime();
               handleChangeValue({
-                [obj.keyNameFrom]: from,
-                [obj.keyNameTo]: to
+                [obj.keyNameFrom]: d
               });
             }}
             value={dateValues}
-            selectRange
           />
         );
 
@@ -205,10 +178,10 @@ function Filters(props: Props) {
 
   function handleSubmit() {
     const params = queryString.parse(history.location.search);
-    const newParams = { ...params, ...state, offset: 0 };
+    const newParams = { ...params, ...state };
     const url = queryString.stringify(newParams);
     history.push(`?${url}`);
-    props.onSubmit({ ...state, offset: 0 });
+    props.onSubmit({ ...state });
     setOpen(false);
   }
 
@@ -223,38 +196,33 @@ function Filters(props: Props) {
     setState(clearObj);
   }
 
-  useEffect(() => {
-    // handleClear();
-  }, [props.filterConf]);
-
-  const filtersInfo = useMemo(
-    () =>
-      props.filterConf
-        .map((obj) => {
-          return obj.type === 'date'
-            ? [
-                {
-                  label: [obj.label],
-                  value: [
-                    formatDate(Number(state[obj.keyNameFrom])),
-                    formatDate(Number(state[obj.keyNameTo]))
-                  ].join(' - ')
-                }
-              ]
-            : obj.type === 'range'
-            ? [
-                {
-                  label: [obj.label],
-                  value: [state[obj.keyNameMin], state[obj.keyNameMax]].join(
-                    ' - '
-                  )
-                }
-              ]
-            : { label: [obj.label], value: state[obj.keyName] };
-        })
-        .flatMap((e) => e),
-    [history.location, state]
-  );
+  const filtersInfo = props.filterConf
+    .map((obj) => {
+      return obj.type === 'date'
+        ? [
+            {
+              label: [obj.label],
+              value: [formatDate(Number(state[obj.keyNameFrom]))].join(' - ')
+            }
+          ]
+        : obj.type === 'range'
+        ? [
+            {
+              label: [obj.label],
+              value: [state[obj.keyNameMin], state[obj.keyNameMax]].join(' - ')
+            }
+          ]
+        : obj.type === 'select'
+        ? {
+            label: [obj.label],
+            value: obj.setLabelValue(state[obj.keyName])
+          }
+        : {
+            label: '',
+            value: ''
+          };
+    })
+    .flatMap((e) => e);
 
   return (
     <>

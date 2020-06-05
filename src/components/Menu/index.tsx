@@ -94,7 +94,7 @@ function Menu(props: Props) {
     },
     {
       title: t('Notifications'),
-      href: `/notifications?from=${defaultFrom}&to=${Date.now()}`,
+      href: `/notifications?from=${defaultFrom}`,
       icon: <NotificationsIcon />,
       exact: false,
       perm: []

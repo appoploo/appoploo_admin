@@ -31,6 +31,8 @@ import { css } from 'emotion';
 import { formatDate } from '../../../utils';
 import { makeStyles } from '@material-ui/styles';
 import queryString from 'query-string';
+import { subWeeks } from 'date-fns';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 const URL = '/Appoploo2/vessels';
 
@@ -63,6 +65,7 @@ function AllVessels() {
 
   const [code, setCode] = useState();
   const [deleteModal, setDeleteModal] = useState();
+  const defaultFrom = subWeeks(Date.now(), 2).getTime();
 
   const handleClickOpen = (value: string) => {
     setCode(value);
@@ -158,6 +161,18 @@ function AllVessels() {
                 />
               </IconButton>
             )}
+
+            <IconButton
+              classes={{ root: marginRight }}
+              size={'small'}
+              onClick={() =>
+                history.push(
+                  `/notifications?from=${defaultFrom}&vesselId=${obj.id}`
+                )
+              }
+              title={t('notifications')}>
+              <NotificationsIcon />
+            </IconButton>
 
             <IconButton
               classes={{ root: marginRight }}

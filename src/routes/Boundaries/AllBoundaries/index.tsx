@@ -15,42 +15,22 @@ import {
   IconButton,
   Dialog,
   DialogTitle,
-  DialogActions,
-  useMediaQuery,
-  Theme
+  DialogActions
 } from '@material-ui/core';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Columns } from '../../../components/Table/types';
 import { Link, useHistory } from 'react-router-dom';
 import useApi from '../../../Hooks';
 import DeleteIcon from '@material-ui/icons/Delete';
-import * as R from 'ramda';
 import { toast } from 'react-toastify';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import QRcode from 'qrcode.react';
 import { css } from 'emotion';
 import { formatDate } from '../../../utils';
-import { makeStyles } from '@material-ui/styles';
 import queryString from 'query-string';
-
-const URL = '/Appoploo2/boundaries';
 
 const marginRight = css`
   margin-right: 15px !important;
 `;
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 'none'
-  },
-  paper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    background: 'transparent',
-    width: 'inherit',
-    maxWidth: 'unset'
-  }
-});
 
 function AllBoundaries() {
   const t = useContext(I18n);
@@ -61,7 +41,7 @@ function AllBoundaries() {
 
   const getGeoObj = () =>
     api
-      .get('/Appoploo2/geoobjects')
+      .get('/Appoploo2/geoobjects?category=GEOFENCE_REGION')
       .json()
       .then((data) => setBoundaries(data))
       .catch(async (e) => console.log(await e.response.json()));
@@ -120,6 +100,16 @@ function AllBoundaries() {
               onClick={() => history.push(`/boundaries/${obj.id}`)}
               title={t('view')}>
               <VisibilityIcon />
+            </IconButton>
+
+            <IconButton
+              classes={{ root: marginRight }}
+              size={'small'}
+              onClick={() =>
+                history.push(`/boundaries/${obj.id}/notifications`)
+              }
+              title={t('view')}>
+              <NotificationsIcon />
             </IconButton>
 
             <IconButton
