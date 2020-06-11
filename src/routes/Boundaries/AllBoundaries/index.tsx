@@ -52,7 +52,7 @@ function AllBoundaries() {
 
   const deleteGeo = () => {
     api
-      .delete(`/Appoploo2/geoobjects/${deleteGeo}`)
+      .delete(`/Appoploo2/geoobjects/${deleteModal}`)
       .then(() => {
         toast.success(t('boundaries-deleted-successfully'));
         getGeoObj();

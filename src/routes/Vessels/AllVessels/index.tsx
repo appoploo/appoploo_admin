@@ -136,17 +136,22 @@ function AllVessels() {
       title: t('actions'),
       render: (obj: any, idx: number) => {
         const code: any = R.path(['devices', 0, 'deviceKey'], obj);
+        console.log(obj);
         return (
           <>
-            <IconButton
-              classes={{ root: marginRight }}
-              size={'small'}
-              onClick={() =>
-                history.push(`/map?selected=${obj.id}${isMd ? '#mapid' : '#'}`)
-              }
-              title={t('view')}>
-              <VisibilityIcon />
-            </IconButton>
+            {obj.devices?.length > 0 && (
+              <IconButton
+                classes={{ root: marginRight }}
+                size={'small'}
+                onClick={() =>
+                  history.push(
+                    `/map?selected=${obj.id}${isMd ? '#mapid' : '#'}`
+                  )
+                }
+                title={t('view')}>
+                <VisibilityIcon />
+              </IconButton>
+            )}
 
             {code && (
               <IconButton
