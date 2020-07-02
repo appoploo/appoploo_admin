@@ -1,1 +1,73 @@
-{"int.actions":{"el":"int.actions","en":"int.actions"},"int.add-new":{"el":"int.add-new","en":"int.add-new"},"int.apply-filters":{"el":"int.apply-filters","en":"int.apply-filters"},"int.boundaries":{"el":"int.boundaries","en":"int.boundaries"},"int.Boundaries":{"el":"int.Boundaries","en":"int.Boundaries"},"int.boundaries-save-successfully":{"el":"int.boundaries-save-successfully","en":"int.boundaries-save-successfully"},"int.cancel":{"el":"int.cancel","en":"int.cancel"},"int.category":{"el":"int.category","en":"int.category"},"int.clear":{"el":"int.clear","en":"int.clear"},"int.close":{"el":"int.close","en":"int.close"},"int.Date":{"el":"int.Date","en":"int.Date"},"int.delete":{"el":"int.delete","en":"int.delete"},"int.description":{"el":"int.description","en":"int.description"},"int.Draught":{"el":"int.Draught","en":"int.Draught"},"int.edit":{"el":"int.edit","en":"int.edit"},"int.edit-vessel-info":{"el":"int.edit-vessel-info","en":"int.edit-vessel-info"},"int.Enter":{"el":"int.Enter","en":"int.Enter"},"int.filters":{"el":"int.filters","en":"int.filters"},"int.from":{"el":"int.from","en":"int.from"},"int.images":{"el":"int.images","en":"int.images"},"int.Last":{"el":"int.Last","en":"int.Last"},"int.Length":{"el":"int.Length","en":"int.Length"},"int.Login":{"el":"int.Login","en":"int.Login"},"int.logout":{"el":"int.logout","en":"int.logout"},"int.Map":{"el":"int.Map","en":"int.Map"},"int.max-price":{"el":"int.max-price","en":"int.max-price"},"int.min-max-price":{"el":"int.min-max-price","en":"int.min-max-price"},"int.min-price":{"el":"int.min-price","en":"int.min-price"},"int.name":{"el":"int.name","en":"int.name"},"int.new-boundary":{"el":"int.new-boundary","en":"int.new-boundary"},"int.notifications":{"el":"int.notifications","en":"int.notifications"},"int.Notifications":{"el":"int.Notifications","en":"int.Notifications"},"int.Password":{"el":"int.Password","en":"int.Password"},"int.product-delete-successfully":{"el":"int.product-delete-successfully","en":"int.product-delete-successfully"},"int.product-infos":{"el":"int.product-infos","en":"int.product-infos"},"int.save":{"el":"int.save","en":"int.save"},"int.search":{"el":"int.search","en":"int.search"},"int.show":{"el":"int.show","en":"int.show"},"int.update":{"el":"int.update","en":"int.update"},"int.Username":{"el":"int.Username","en":"int.Username"},"int.vessel":{"el":"int.vessel","en":"int.vessel"},"int.Vessel":{"el":"int.Vessel","en":"int.Vessel"},"int.vessel-created-successfully":{"el":"int.vessel-created-successfully","en":"int.vessel-created-successfully"},"int.vessel-delete-successfully":{"el":"int.vessel-delete-successfully","en":"int.vessel-delete-successfully"},"int.vessel-name":{"el":"int.vessel-name","en":"int.vessel-name"},"int.Vessels":{"el":"int.Vessels","en":"int.Vessels"},"int.vessel-type":{"el":"int.vessel-type","en":"int.vessel-type"},"int.view":{"el":"int.view","en":"int.view"},"":{"el":"","en":""}}
+{
+  "int.actions": { "el": "Ενέργειες", "en": "Actions" },
+  "int.add-new": { "el": "Δημιουργία νέου", "en": "Add new" },
+  "int.apply-filters": { "el": "Εφαρμογή φίλτρου", "en": "Apply filters" },
+  "int.boundaries": { "el": "Περιοχές", "en": "Boundaries" },
+  "int.Boundaries": { "el": "Περιοχές", "en": "Boundaries" },
+  "int.boundaries-save-successfully": {
+    "el": "Η περιοχή αποθηκεύθηκε",
+    "en": "Boundary saved"
+  },
+  "int.cancel": { "el": "Ακύρωση", "en": "Cancel" },
+  "int.category": { "el": "Κατηγορία", "en": "Category" },
+  "int.clear": { "el": "Καθαρισμός", "en": "Clear" },
+  "int.close": { "el": "Έξοδος", "en": "Close" },
+  "int.Date": { "el": "Ημερομηνια", "en": "Date" },
+  "int.delete": { "el": "Διαγραφή", "en": "Delete" },
+  "int.description": { "el": "Περιγραφή", "en": "Description" },
+  "int.Draught": { "el": "Βύθισμα", "en": "Draught" },
+  "int.edit": { "el": "Επεξεργασία", "en": "Edit" },
+  "int.edit-vessel-info": {
+    "el": "Επεξεργασία σκάφους",
+    "en": "Edit vessel info"
+  },
+  "int.Enter": { "el": "Καταχώρηση", "en": "Enter" },
+  "int.filters": { "el": "Φίλτρα", "en": "Filters" },
+  "int.from": { "el": "Από", "en": "From" },
+  "int.images": { "el": "Εικόνες", "en": "Images" },
+  "int.Last": { "el": "Last", "en": "Last" },
+  "int.Length": { "el": "Μήκος", "en": "Length" },
+  "int.Login": { "el": "Είσοδος", "en": "Login" },
+  "int.logout": { "el": "Αποσύνδεση", "en": "Logout" },
+  "int.Map": { "el": "Χάρτης", "en": "Map" },
+  "int.max-price": { "el": "Μέγιστη τιμή", "en": "Max price" },
+  "int.min-max-price": { "el": "int.min-max-price", "en": "int.min-max-price" },
+  "int.min-price": { "el": "Ελάχιστη τιμή", "en": "Min price" },
+  "int.name": { "el": "Όνομα", "en": "Name" },
+  "int.new-boundary": { "el": "Νέα περιοχή", "en": "New boundary" },
+  "int.notifications": { "el": "Ειδοποιήσεις", "en": "Notifications" },
+  "int.Notifications": { "el": "Ειδοποιήσεις", "en": "Notifications" },
+  "int.Password": { "el": "Κωδικός χρήστη", "en": "Password" },
+  "int.product-delete-successfully": {
+    "el": "Το προϊόν διαγράφηκε",
+    "en": "Product deleted"
+  },
+  "int.Length (LOA)": { "el": "Μήκος σκάφους", "en": "Vessel length" },
+  "Vessel description": {
+    "el": "Περιγραφή σκάφους",
+    "en": "Vessel description"
+  },
+  "int.product-infos": { "el": "Πληροφορίες", "en": "Product info" },
+  "int.save": { "el": "Αποθήκευση", "en": "Save" },
+  "int.search": { "el": "Αναζήτηση", "en": "Search" },
+  "int.show": { "el": "Εμφάνιση", "en": "Show" },
+  "int.update": { "el": "Ενημέρωση", "en": "Update" },
+  "int.Username": { "el": "Όνομα χρήστη", "en": "Username" },
+  "int.vessel": { "el": "Σκάφος", "en": "Vessel" },
+  "int.Vessel": { "el": "Σκάφος", "en": "Vessel" },
+  "int.vessel-created-successfully": {
+    "el": "Το σκάφος αποθηκεύθηκε",
+    "en": "Vessel created"
+  },
+  "int.vessel-delete-successfully": {
+    "el": "Το σκάφος διαγράφηκε",
+    "en": "Vessel deleted"
+  },
+  "int.routes-from": { "el": "διαδρομές", "en": "routes" },
+  "int.vessel-name": { "el": "Όνομα σκάφους", "en": "Vessel name" },
+  "int.vessels": { "el": "Σκάφη", "en": "Vessels" },
+  "int.Vessels": { "el": "Σκάφη", "en": "Vessels" },
+  "int.vessel-type": { "el": "Τύπος σκάφους", "en": "Vessel type" },
+  "int.view": { "el": "Εμφάνιση", "en": "View" },
+  "": { "el": "", "en": "" }
+}

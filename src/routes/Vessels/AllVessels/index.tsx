@@ -128,7 +128,6 @@ function AllVessels() {
       title: t('int.actions'),
       render: (obj: any, idx: number) => {
         const code: any = R.path(['devices', 0, 'deviceKey'], obj);
-        console.log(obj);
         return (
           <>
             {obj.devices?.length > 0 && (

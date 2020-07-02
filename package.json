@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run generateI18nJson && react-scripts build",
+    "build": "CI='' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "generateI18nList": "./bin/generate_auto_i18n_list.sh",

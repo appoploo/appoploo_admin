@@ -59,7 +59,7 @@
     "en": "int.vessel-delete-successfully"
   },
   "int.vessel-name": { "el": "int.vessel-name", "en": "int.vessel-name" },
-  "int.Vessels": { "el": "int.Vessels", "en": "int.Vessels" },
+  "int.vessels": { "el": "Σκάφη", "en": "Vessels" },
   "int.vessel-type": { "el": "int.vessel-type", "en": "int.vessel-type" },
   "int.view": { "el": "int.view", "en": "int.view" },
   "": { "el": "", "en": "" }

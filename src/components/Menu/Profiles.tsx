@@ -39,7 +39,6 @@ function Profile() {
       <Typography className={classes.name} variant="h4">
         {R.propOr('user', 'sub', account)}
       </Typography>
-      <Typography variant="body2">{R.propOr('', 'iss', account)}</Typography>
     </div>
   );
 }

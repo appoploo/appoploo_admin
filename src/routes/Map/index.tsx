@@ -218,7 +218,6 @@ function Map() {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-
   return (
     <>
       <div
@@ -275,7 +274,7 @@ function Map() {
       <Grid spacing={3} container>
         <Grid xs={12} sm={12} md={12} lg={5} xl={5} item>
           <Card elevation={3}>
-            <CardHeader title="vessels" />
+            <CardHeader title={t('int.vessels')} />
             <CardContent>
               <List
                 style={{

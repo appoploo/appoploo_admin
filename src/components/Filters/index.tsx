@@ -146,7 +146,6 @@ function Filters(props: Props) {
         return (
           <Calendar
             onChange={(date) => {
-              console.log(date);
               const d = new Date(date as Date).getTime();
               handleChangeValue({
                 [obj.keyNameFrom]: d
