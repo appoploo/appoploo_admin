@@ -37,12 +37,12 @@ const Login = () => {
   });
   const [err, setErr] = useState({});
 
-  const handleChange = useCallback(obj => {
-    setInfos(s => ({ ...s, ...obj }));
+  const handleChange = useCallback((obj) => {
+    setInfos((s) => ({ ...s, ...obj }));
   }, []);
 
   const dispatch = useDispatch();
-  const _login = React.useCallback(data => dispatch(login(data)), [dispatch]);
+  const _login = React.useCallback((data) => dispatch(login(data)), [dispatch]);
 
   const handleSubmit = useCallback(
     (infos: { username: string; password: string }) => {
@@ -57,14 +57,14 @@ const Login = () => {
         },
         body: JSON.stringify(infos)
       })
-        .then(res => {
+        .then((res) => {
           if (res.status > 400) throw new Error('err');
           return res.json();
         })
-        .then(data => {
+        .then((data) => {
           _login(data);
         })
-        .catch(reason => {
+        .catch((reason) => {
           console.error(reason);
         });
     },
@@ -79,7 +79,7 @@ const Login = () => {
   return (
     <div className={loginContainer}>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(infos);
         }}
@@ -88,21 +88,21 @@ const Login = () => {
         <Card classes={{ root: card }} elevation={3}>
           <CardContent classes={{ root: content }}>
             <CardHeader
-              title={<Typography variant="h3">{t('Login')}</Typography>}
+              title={<Typography variant="h3">{t('int.Login')}</Typography>}
               subheader={
                 <Typography variant="caption">{dateNow}</Typography>
               }></CardHeader>
             <br />
             <br />
             <TextField
-              onChange={evt =>
+              onChange={(evt) =>
                 handleChange({
                   username: evt.currentTarget.value
                 })
               }
               error={Boolean(R.propOr('', 'username', err))}
               helperText={R.propOr('', 'username', err)}
-              label={t('Username')}
+              label={t('int.Username')}
               required
               variant="outlined"
               fullWidth
@@ -110,7 +110,7 @@ const Login = () => {
 
             <br />
             <TextField
-              onChange={evt =>
+              onChange={(evt) =>
                 handleChange({
                   password: evt.currentTarget.value
                 })
@@ -118,7 +118,7 @@ const Login = () => {
               type="password"
               error={Boolean(R.propOr('', 'password', err))}
               helperText={R.propOr('', 'password', err)}
-              label={t('Password')}
+              label={t('int.Password')}
               required
               variant="outlined"
               fullWidth
@@ -133,7 +133,7 @@ const Login = () => {
               variant="contained"
               color="secondary"
               fullWidth>
-              {t('Login')}
+              {t('int.Login')}
             </Button>
           </CardContent>
           <CardMedia

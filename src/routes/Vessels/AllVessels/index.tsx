@@ -65,9 +65,9 @@ function AllVessels() {
 
   const [code, setCode] = useState();
   const [deleteModal, setDeleteModal] = useState();
-  const defaultFrom = subWeeks(Date.now(), 2).getTime();
 
   const handleClickOpen = (value: string) => {
+    // @ts-ignore
     setCode(value);
   };
 
@@ -92,7 +92,7 @@ function AllVessels() {
   const deleteVessel = useCallback(async () => {
     await api.delete(`/Appoploo2/api/rest/vessels/${deleteModal}`);
     setDeleteModal(undefined);
-    toast.success(t('vessel-delete-successfully'));
+    toast.success(t('int.vessel-delete-successfully'));
     await getVessels();
   }, [history.location.search, deleteModal]);
   const isMd = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
@@ -101,39 +101,31 @@ function AllVessels() {
 
   const columns: Columns = [
     {
-      title: t('name'),
+      title: t('int.name'),
       field: 'name'
     },
     {
-      title: t('description'),
+      title: t('int.description'),
       render: (obj) => R.propOr('-', 'description', obj)
     },
     {
-      title: t('Vessel Type'),
+      title: t('int.Vessel Type'),
       render: (obj) => `${R.pathOr('-', ['vesselType', 'vesselType'], obj)}`
     },
 
     {
-      title: t('Length overall'),
+      title: t('int.Length overall'),
       render: (obj) => R.propOr('-', 'loa', obj)
     },
     {
-      title: t('Date Created'),
+      title: t('int.draught'),
       render: (obj) => {
-        const d = new Date(obj.createdAt as Date);
-        return formatDate(d.getTime());
-      }
-    },
-    {
-      title: t('Last Update'),
-      render: (obj) => {
-        const d = new Date(obj.updatedAt as Date);
-        return formatDate(d.getTime());
+        return obj.draught;
       }
     },
 
     {
-      title: t('actions'),
+      title: t('int.actions'),
       render: (obj: any, idx: number) => {
         const code: any = R.path(['devices', 0, 'deviceKey'], obj);
         console.log(obj);
@@ -148,7 +140,7 @@ function AllVessels() {
                     `/map?selected=${obj.id}${isMd ? '#mapid' : '#'}`
                   )
                 }
-                title={t('view')}>
+                title={t('int.view')}>
                 <VisibilityIcon />
               </IconButton>
             )}
@@ -158,7 +150,7 @@ function AllVessels() {
                 classes={{ root: marginRight }}
                 size={'small'}
                 onClick={() => handleClickOpen(code)}
-                title={t('show qr code')}>
+                title={t('int.show qr code')}>
                 <img
                   src="/images/qrScan.png"
                   alt=":)"
@@ -170,20 +162,8 @@ function AllVessels() {
             <IconButton
               classes={{ root: marginRight }}
               size={'small'}
-              onClick={() =>
-                history.push(
-                  `/notifications?from=${defaultFrom}&vesselId=${obj.id}`
-                )
-              }
-              title={t('notifications')}>
-              <NotificationsIcon />
-            </IconButton>
-
-            <IconButton
-              classes={{ root: marginRight }}
-              size={'small'}
               onClick={() => setDeleteModal(obj.id)}
-              title={t('delete')}>
+              title={t('int.delete')}>
               <DeleteIcon />
             </IconButton>
           </>
@@ -205,10 +185,10 @@ function AllVessels() {
           alignItems: 'flex-end',
           justifyContent: 'space-between'
         }}>
-        <Typography variant="h4">{t('Vessels')}</Typography>
+        <Typography variant="h4">{t('int.Vessels')}</Typography>
 
         <Button component={Link} to="/vessels/new" variant="contained">
-          {t('add-new')}
+          {t('int.add-new')}
         </Button>
       </div>
       <br />
@@ -236,6 +216,7 @@ function AllVessels() {
         </DialogActions>
       </Dialog>
       <Dialog classes={classes} onClose={handleClose} open={Boolean(code)}>
+        {/* @ts-ignore */}
         {code && <QRcode size={500} value={code} />}
       </Dialog>
     </>

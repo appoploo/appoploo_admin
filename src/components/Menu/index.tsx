@@ -77,15 +77,7 @@ function Menu(props: Props) {
   const t = useContext(I18n);
   const pages = [
     {
-      title: t('Vessels'),
-      href: '/vessels',
-      icon: <DirectionsBoatIcon />,
-      exact: false,
-      perm: []
-      //   perm: ['report:view']
-    },
-    {
-      title: t('Map'),
+      title: t('int.Map'),
       href: `/map`,
       icon: <MapIcon />,
       exact: false,
@@ -93,7 +85,16 @@ function Menu(props: Props) {
       //   perm: ['report:view']
     },
     {
-      title: t('Notifications'),
+      title: t('int.Vessels'),
+      href: '/vessels',
+      icon: <DirectionsBoatIcon />,
+      exact: false,
+      perm: []
+      //   perm: ['report:view']
+    },
+
+    {
+      title: t('int.Notifications'),
       href: `/notifications?from=${defaultFrom}`,
       icon: <NotificationsIcon />,
       exact: false,
@@ -102,7 +103,7 @@ function Menu(props: Props) {
     },
 
     {
-      title: t('Boundaries'),
+      title: t('int.Boundaries'),
       href: `/boundaries`,
       icon: <SettingsIcon />,
       exact: false,

@@ -91,7 +91,7 @@ function NewVessel() {
                 json: { ...defaultValues, ...state }
               })
               .then(() => {
-                toast.success(t('vessel-created-successfully'));
+                toast.success(t('int.vessel-created-successfully'));
                 history.push('/vessels');
               })
           }
@@ -172,7 +172,7 @@ function NewVessel() {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
-                    label={t('Length (LOA)')}
+                    label={t('int.Length (LOA)')}
                     value={state.loa}
                     onChange={(evt) => {
                       const loa = +evt.target.value;
@@ -200,7 +200,7 @@ function NewVessel() {
                     }}
                     fullWidth
                     type="number"
-                    label={t('Draught')}
+                    label={t('int.Draught')}
                     required
                     margin="dense"
                     variant="outlined"

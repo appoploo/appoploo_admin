@@ -1,6 +1,6 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useCallback } from 'react';
 
-import Leaflet, { latLng } from 'leaflet';
+import Leaflet from 'leaflet';
 import { mapClass } from './css';
 import {
   Typography,
@@ -29,7 +29,11 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { makeStyles } from '@material-ui/styles';
 import Calendar from 'react-calendar';
 import { formatDate } from '../../utils';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import { subWeeks } from 'date-fns';
 const polyline = require('google-polyline');
+
+const defaultFrom = subWeeks(Date.now(), 2).getTime();
 
 interface IVesselType {
   id: number;
@@ -65,12 +69,48 @@ function Map() {
   const [group, setGroup] = useState<Leaflet.FeatureGroup<any>>();
   const [vessels, setVessels] = useState<Vessel[]>([]);
   const [routes, setRoutes] = useState([]);
+  const [notf, setNotf] = useState<Record<string, any>>({});
+  const history = useHistory();
   const classes = useStyles();
   const api = useApi();
 
+  const getNotf = useCallback(
+    (id) => {
+      api
+        .get(
+          `/Appoploo2/notifications?from=${defaultFrom}&vesselId=${id}&category=GEOFENCE_REGION`
+        )
+        .json()
+        .then((obj: any) => {
+          setNotf((notf) => ({ ...notf, [id]: obj[2]?.approach }));
+        });
+    },
+    [history.location.search]
+  );
+
   useEffect(() => {
-    if (!map || !group || routes.length < 1) return;
+    vessels
+      .filter((v) => getVesselPosition(v))
+      .forEach((v) => {
+        getNotf(v.id);
+      });
+  }, [vessels]);
+
+  useEffect(() => {
+    if (!map || !group) return;
     group.clearLayers();
+
+    if (routes.length < 1) {
+      const vessel = vessels.find((obj) => obj.id === Number(params.selected));
+      if (!vessel) return;
+      const position = getVesselPosition(vessel);
+      if (!position) return;
+      const latLng: any = [position?.latitude, position?.longitude];
+      map.setView(latLng, map.getZoom(), {
+        animate: true
+      });
+      return;
+    }
 
     Leaflet.polyline(routes, { color: 'red' }).addTo(group);
     const bounds = new Leaflet.LatLngBounds(routes);
@@ -133,7 +173,7 @@ function Map() {
   }
   const isMd = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const t = useContext(I18n);
-  const history = useHistory();
+
   const params = queryString.parse(history.location.search) as {
     from?: number;
     selected?: string;
@@ -188,14 +228,14 @@ function Map() {
           justifyContent: 'space-between',
           height: '36px'
         }}>
-        <Typography variant="h4">{t('Map')}</Typography>
+        <Typography variant="h4">{t('int.Map')}</Typography>
         {params.selected && (
           <>
             <Button
               variant="contained"
               aria-describedby={id}
               onClick={(event) => setAnchorEl(event.currentTarget)}>
-              Routes from:{' '}
+              {t('int.routes-from')}:{' '}
               {params.from ? formatDate(+Number(params?.from)) : `DD/MM/YYYY`}
             </Button>
             <Popover
@@ -298,6 +338,19 @@ function Map() {
                                 </IconButton>
                               </a>
                             </ListItemIcon>
+                          )}
+
+                          {notf[vessel.id] && (
+                            <IconButton
+                              size={'small'}
+                              onClick={() =>
+                                history.push(
+                                  `/notifications?from=${defaultFrom}&vesselId=${vessel.id}&category=GEOFENCE_REGION`
+                                )
+                              }
+                              title={t('int.notifications')}>
+                              <NotificationsIcon htmlColor="#f00c" />
+                            </IconButton>
                           )}
                         </ListItemSecondaryAction>
                       </ListItem>

@@ -74,23 +74,19 @@ function AllBoundaries() {
 
   const columns: Columns = [
     {
-      title: t('name'),
+      title: t('int.name'),
       field: 'name'
     },
 
     {
-      title: t('category'),
-      field: 'category'
-    },
-    {
-      title: t('Date Created'),
+      title: t('int.Date Created'),
       render: (obj) => {
         const d = new Date(obj.createdAt as Date);
         return formatDate(d.getTime());
       }
     },
     {
-      title: t('actions'),
+      title: t('int.actions'),
       render: (obj: any, idx: number) => {
         return (
           <>
@@ -98,7 +94,7 @@ function AllBoundaries() {
               classes={{ root: marginRight }}
               size={'small'}
               onClick={() => history.push(`/boundaries/${obj.id}`)}
-              title={t('view')}>
+              title={t('int.view')}>
               <VisibilityIcon />
             </IconButton>
 
@@ -108,7 +104,7 @@ function AllBoundaries() {
               onClick={() =>
                 history.push(`/boundaries/${obj.id}/notifications`)
               }
-              title={t('view')}>
+              title={t('int.view')}>
               <NotificationsIcon />
             </IconButton>
 
@@ -116,7 +112,7 @@ function AllBoundaries() {
               classes={{ root: marginRight }}
               size={'small'}
               onClick={() => setDeleteModal(obj.id)}
-              title={t('delete')}>
+              title={t('int.delete')}>
               <DeleteIcon />
             </IconButton>
           </>
@@ -138,10 +134,10 @@ function AllBoundaries() {
           alignItems: 'flex-end',
           justifyContent: 'space-between'
         }}>
-        <Typography variant="h4">{t('boundaries')}</Typography>
+        <Typography variant="h4">{t('int.boundaries')}</Typography>
 
         <Button component={Link} to="/boundaries/new" variant="contained">
-          {t('add-new')}
+          {t('int.add-new')}
         </Button>
       </div>
       <br />

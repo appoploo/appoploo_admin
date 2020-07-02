@@ -12,14 +12,14 @@ export function Render() {
   return <h1>{history.location.pathname}</h1>;
 }
 
-function RedirectToVesseles() {
-  return <Redirect to="/vessels" />;
+function RedirectToMap() {
+  return <Redirect to="/map" />;
 }
 const Routes = () => {
   return (
     <Switch>
       <Route component={NotFound} exact path="/not-found" />
-      <Route exact path="/" component={RedirectToVesseles} />
+      <Route exact path="/" component={RedirectToMap} />
       <Route path="/vessels" component={Vessels} />
       <Route path="/notifications" component={Notifications} />
       <Route path="/boundaries" component={Boundaries} />

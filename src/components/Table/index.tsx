@@ -28,7 +28,6 @@ const useStyles = makeStyles({
   },
   searchTermCont: {
     display: 'flex',
-    justifyContent: 'flex-end',
     padding: '10px',
     height: '20px'
   },

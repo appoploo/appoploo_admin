@@ -55,7 +55,7 @@ function AllVessels() {
     () =>
       [
         {
-          label: 'from',
+          label: t('int.from'),
           keyNameFrom: 'from',
           type: 'date'
         },
@@ -89,7 +89,7 @@ function AllVessels() {
           justifyContent: 'space-between',
           height: '36px'
         }}>
-        <Typography variant="h4">{t('Notifications')}</Typography>
+        <Typography variant="h4">{t('int.Notifications')}</Typography>
       </div>
       <br />
       <Filters

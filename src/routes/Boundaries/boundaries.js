@@ -51,7 +51,7 @@ function Boundaries() {
       })
       .json()
       .then(() => {
-        toast.success(t('boundaries-save-successfully'));
+        toast.success(t('int.boundaries-save-successfully'));
         setModal(false);
       })
       .catch(async (e) => console.log(await e.response.json()));
@@ -134,13 +134,13 @@ function Boundaries() {
           alignItems: 'flex-end',
           justifyContent: 'space-between'
         }}>
-        <Typography variant="h4">{name || 'New Boundary'}</Typography>
+        <Typography variant="h4">{name || t('int.new-boundary')}</Typography>
 
         <Button
           disabled={!latLngs.length}
           onClick={() => (id === 'new' ? setModal(true) : save())}
           variant="contained">
-          {t(id === 'new' ? 'save' : 'update')}
+          {t(id === 'new' ? 'int.save' : 'int.update')}
         </Button>
       </div>
       <Card elevation={4} className={mapClass} id="mapid" />
@@ -151,7 +151,7 @@ function Boundaries() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">
-          Enter name for this boundary.{' '}
+          {t('int.Enter name for this boundary')}.
         </DialogTitle>
 
         <DialogContent>
@@ -167,9 +167,9 @@ function Boundaries() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setModal(undefined)} color="primary">
-            Cancel
+            {t('int.cancel')}
           </Button>
-          <Button onClick={save}>Save</Button>
+          <Button onClick={save}>{t('int.save')}</Button>
         </DialogActions>
       </Dialog>
     </>

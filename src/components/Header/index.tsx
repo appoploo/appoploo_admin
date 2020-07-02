@@ -68,8 +68,12 @@ function Header(props: Props) {
 
   const t = useContext(I18n);
   return (
-    <AppBar elevation={0}>
+    <AppBar style={{ backgroundColor: '#486493' }} elevation={0}>
       <Toolbar>
+        <img
+          style={{ width: '190px' }}
+          src="/images/Appoploo_logo_one_line.png"
+        />
         <Hidden mdUp>
           <IconButton
             onClick={props.setOpen}
