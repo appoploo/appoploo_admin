@@ -39,13 +39,15 @@ function AlignItemsList(props: Props) {
     <List className={classes.root}>
       {props.data.map((notf, key) => {
         const msg = notf.approach ? 'arrived at' : 'departed from';
-        const Icon = notf.approach ? FlightLandIcon : FlightTakeoffIcon;
+        const icon = notf.approach
+          ? '/images/arrival.png'
+          : '/images/departure.png';
 
         return (
           <React.Fragment key={key}>
             <ListItem alignItems="flex-start">
               <ListItemIcon>
-                <Icon />
+                <img style={{ width: '32px' }} src={icon} />
               </ListItemIcon>
               <ListItemText
                 primary={

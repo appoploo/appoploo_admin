@@ -24,6 +24,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { IReduxStore } from '../../redux/reducers';
 import { useHistory } from 'react-router-dom';
 import { logout } from '../../redux/actions/account';
+import { setLang } from '../../redux/actions/i18n';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,8 +52,12 @@ function Header(props: Props) {
 
   const history = useHistory();
   const token = useSelector((store: IReduxStore) => store.account.token);
+  const locale = useSelector((store: IReduxStore) => store.i18n.lang);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorElLocale, setAnchorElLocale] = useState<null | HTMLElement>(
+    null
+  );
   const open = Boolean(anchorEl);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -65,7 +70,9 @@ function Header(props: Props) {
 
   const dispatch = useDispatch();
   const _logout = React.useCallback(() => dispatch(logout()), [dispatch]);
-
+  const _setLang = React.useCallback((locale) => dispatch(setLang(locale)), [
+    dispatch
+  ]);
   const t = useContext(I18n);
   return (
     <AppBar style={{ backgroundColor: '#486493' }} elevation={0}>
@@ -83,7 +90,18 @@ function Header(props: Props) {
             <MenuIcon />
           </IconButton>
         </Hidden>
+
         <Typography variant="h6" className={classes.title}></Typography>
+
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={(evt) => setAnchorElLocale(evt.currentTarget)}
+          color="inherit">
+          <img src={`/images/${locale}.svg`} className={classes.xx} />
+        </IconButton>
+
         {token && (
           <IconButton
             aria-label="account of current user"
@@ -112,6 +130,45 @@ function Header(props: Props) {
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary={t('int.logout')} />
+            </ListItem>
+          </List>
+          <Divider />
+        </Popover>
+
+        <Popover
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left'
+          }}
+          anchorEl={anchorElLocale}
+          onClose={() => setAnchorElLocale(null)}
+          open={Boolean(anchorElLocale)}>
+          <List component="nav" aria-label="main mailbox folders">
+            <ListItem
+              onClick={() => {
+                _setLang('el');
+                setAnchorElLocale(null);
+              }}
+              button>
+              <ListItemIcon>
+                <img src="/images/el.svg" />
+              </ListItemIcon>
+              <ListItemText primary={t('int.el')} />
+            </ListItem>
+            <ListItem
+              onClick={() => {
+                _setLang('en');
+                setAnchorElLocale(null);
+              }}
+              button>
+              <ListItemIcon>
+                <img src="/images/en.svg" />
+              </ListItemIcon>
+              <ListItemText primary={t('int.en')} />
             </ListItem>
           </List>
           <Divider />

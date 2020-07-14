@@ -191,12 +191,12 @@ function AllVessels() {
         </Button>
       </div>
       <br />
-      <Filters onSubmit={getVessels} filterConf={filterConf} />
+      {/* <Filters onSubmit={getVessels} filterConf={filterConf} /> */}
       <MaterialTable
         data={vessels.filter((v: any) => v.name.toLowerCase().match(re))}
         loading={loading}
         columns={columns}
-        onChange={getVessels}
+        onChange={(e) => void 0}
       />
       <Dialog
         open={Boolean(deleteModal)}

@@ -234,12 +234,17 @@ function Filters(props: Props) {
           </div>
         ))}
         <span className={classes.spacer} />
-        <IconButton
+
+        <Button
           title={t('int.filters')}
           onClick={() => setOpen(!open)}
           color="primary">
+          <Typography variant="h5" style={{ marginRight: '20px' }}>
+            {t('int.filters')}
+          </Typography>
+
           <FilterListIcon />
-        </IconButton>
+        </Button>
       </Card>
       <br />
 

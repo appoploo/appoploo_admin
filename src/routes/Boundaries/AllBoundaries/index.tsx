@@ -70,8 +70,6 @@ function AllBoundaries() {
     }
   }
 
-  const filterConf = useMemo(() => [] as FilterType[], [t]);
-
   const columns: Columns = [
     {
       title: t('int.name'),
@@ -96,16 +94,6 @@ function AllBoundaries() {
               onClick={() => history.push(`/boundaries/${obj.id}`)}
               title={t('int.view')}>
               <VisibilityIcon />
-            </IconButton>
-
-            <IconButton
-              classes={{ root: marginRight }}
-              size={'small'}
-              onClick={() =>
-                history.push(`/boundaries/${obj.id}/notifications`)
-              }
-              title={t('int.view')}>
-              <NotificationsIcon />
             </IconButton>
 
             <IconButton
@@ -141,13 +129,12 @@ function AllBoundaries() {
         </Button>
       </div>
       <br />
-      <Filters onSubmit={getboundaries} filterConf={filterConf} />
       <MaterialTable
         data={boundaries.filter((v: any) =>
           v.name.toLocaleLowerCase().match(re)
         )}
         columns={columns}
-        onChange={getboundaries}
+        onChange={(w) => void 0}
       />
       <Dialog
         open={Boolean(deleteModal)}

@@ -69,5 +69,18 @@
   "int.Vessels": { "el": "Σκάφη", "en": "Vessels" },
   "int.vessel-type": { "el": "Τύπος σκάφους", "en": "Vessel type" },
   "int.view": { "el": "Εμφάνιση", "en": "View" },
-  "": { "el": "", "en": "" }
+  "": { "el": "", "en": "" },
+  "int.Vessel Type": { "el": "Τύπος Σκάφους", "en": "Vessel Type" },
+  "int.draught": { "el": "Βύθισμα", "en": "Draught" },
+  "int.Length overall": { "el": "Μήκος", "en": "Length" },
+  "int.Date Created": { "el": "Ημ/νία καταχώριση", "en": "Date Created" },
+  "int.lastUpdate": { "el": "Τελευταία ενημέρωση", "en": "Last Update" },
+  "int.en": {
+    "el": "Αγγλικά",
+    "en": "English"
+  },
+  "int.el": {
+    "el": "Ελληνικά",
+    "en": "Greek"
+  }
 }

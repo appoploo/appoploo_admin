@@ -30,7 +30,7 @@ import { makeStyles } from '@material-ui/styles';
 import Calendar from 'react-calendar';
 import { formatDate } from '../../utils';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { subWeeks } from 'date-fns';
+import { subWeeks, formatDistance } from 'date-fns';
 const polyline = require('google-polyline');
 
 const defaultFrom = subWeeks(Date.now(), 2).getTime();
@@ -59,6 +59,10 @@ const GreceCoords = {
   lat: 37.98381,
   lng: 23.727539
 };
+
+function getTelematicsData(vessel: Vessel) {
+  return vessel.devices[0]?.telematicsData?.device;
+}
 
 function getVesselPosition(vessel: Vessel) {
   return vessel.devices[0]?.telematicsData?.position;
@@ -291,6 +295,24 @@ function Map() {
                     ).toFixed(2);
                     const isSelected = Number(params.selected) === vessel.id;
                     const rotate = position?.course || 0;
+
+                    const telematicsDataDevice = getTelematicsData(vessel);
+                    const lastUpdate = telematicsDataDevice.lastUpdate
+                      ? formatDistance(
+                          new Date(telematicsDataDevice?.lastUpdate),
+                          new Date()
+                        )
+                      : '';
+
+                    console.log(telematicsDataDevice);
+
+                    const displayLastUpdate =
+                      lastUpdate === `less than a minute`
+                        ? 'Just now'
+                        : lastUpdate === ``
+                        ? ''
+                        : `${lastUpdate} ago`;
+
                     return (
                       <ListItem
                         classes={{
@@ -309,6 +331,10 @@ function Map() {
                           style={{ minWidth: 50 }}
                           primary={vessel.name}
                           secondary={vessel.vesselType.vesselType}
+                        />
+                        <ListItemText
+                          primary={t('int.lastUpdate')}
+                          secondary={displayLastUpdate}
                         />
                         <ListItemText
                           primary={`${speed?.toFixed(2)} kts`}
