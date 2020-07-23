@@ -40,8 +40,10 @@ function Boundaries() {
     api
       .post('/Appoploo2/geoobjects/persist', {
         json: {
-          id: id === 'new' ? null : id,
+          uuid: id === 'new' ? null : id,
           name: name,
+          owner: 1,
+          uuid: 'a',
           geometry: {
             type: 'MultiPoint',
             coordinates: latLngs.map((obj) => [obj.lng, obj.lat])
