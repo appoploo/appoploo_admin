@@ -40,14 +40,16 @@ function Boundaries() {
     api
       .post('/Appoploo2/geoobjects/persist', {
         json: {
-          uuid: id === 'new' ? null : id,
+          id: id === 'new' ? null : id,
           name: name,
           owner: 1,
-          uuid: 'a',
           geometry: {
             type: 'MultiPoint',
             coordinates: latLngs.map((obj) => [obj.lng, obj.lat])
           },
+          deleted: null,
+          areaType: null,
+          category: 0,
           category: 'GEOFENCE_REGION'
         }
       })
@@ -112,16 +114,15 @@ function Boundaries() {
   useEffect(() => {
     if (id === 'new') return;
     api
-      .get(`  /Appoploo2/geoobjects/${id}`)
+      .get(`/Appoploo2/geoobjects/${id}`)
       .json()
       .then((res) => {
-        res.geometry.coordinates.length > 0 &&
-          setLatLngs(
-            res.geometry.coordinates.map((arr) => ({
-              lat: arr[1],
-              lng: arr[0]
-            }))
-          );
+        setLatLngs(
+          res.geometry.coordinates.map((arr) => ({
+            lat: arr[1],
+            lng: arr[0]
+          }))
+        );
         setName(res.name);
       })
       .catch(async (e) => console.log(e.response));

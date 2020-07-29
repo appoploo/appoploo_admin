@@ -304,8 +304,6 @@ function Map() {
                         )
                       : '';
 
-                    console.log(telematicsDataDevice);
-
                     const displayLastUpdate =
                       lastUpdate === `less than a minute`
                         ? 'Just now'
