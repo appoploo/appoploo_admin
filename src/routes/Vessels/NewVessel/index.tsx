@@ -87,9 +87,12 @@ function NewVessel() {
         <Button
           onClick={() =>
             api
-              .post(`/Appoploo2/api/rest/vessels`, {
-                json: { ...defaultValues, ...state }
-              })
+              .post(
+                `https://server.cruiser.gr:8443/Appoploo2/api/rest/vessels`,
+                {
+                  json: { ...defaultValues, ...state }
+                }
+              )
               .then(() => {
                 toast.success(t('int.vessel-created-successfully'));
                 history.push('/vessels');

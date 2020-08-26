@@ -59,7 +59,7 @@ function ViewProduct() {
   useEffect(() => {
     if (!params.id) return;
     api
-      .get(`/api/bo/products/${params.id}`)
+      .get(`https://server.cruiser.gr:8443/api/bo/products/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         const { name = '', price = 0, lpReward = 0, purchased = 0 } = data;
@@ -73,7 +73,7 @@ function ViewProduct() {
   }, []);
 
   const deleteProduct = useCallback(() => {
-    api.delete(`/api/bo/products/${params.id}`);
+    api.delete(`https://server.cruiser.gr:8443/api/bo/products/${params.id}`);
     toast.success(t('int.product-delete-successfully'));
     history.push('/products');
   }, [params]);

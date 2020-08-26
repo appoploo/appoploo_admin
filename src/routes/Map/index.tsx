@@ -53,7 +53,7 @@ const useStyles = makeStyles({
   }
 });
 
-const VesselURL = '/Appoploo2/vessels';
+const VesselURL = 'https://server.cruiser.gr:8443/Appoploo2/vessels';
 
 const GreceCoords = {
   lat: 37.98381,
@@ -82,7 +82,7 @@ function Map() {
     (id) => {
       api
         .get(
-          `/Appoploo2/notifications?from=${defaultFrom}&vesselId=${id}&category=GEOFENCE_REGION`
+          `https://server.cruiser.gr:8443/Appoploo2/notifications?from=${defaultFrom}&vesselId=${id}&category=GEOFENCE_REGION`
         )
         .json()
         .then((obj: any) => {
@@ -187,7 +187,11 @@ function Map() {
     const firstDevice = vessels.find((v) => +v.id === Number(params.selected));
     const IMEI = firstDevice?.devices[0]?.deviceKey;
     if (IMEI && from) {
-      const res = await api.get(`/Appoploo2/route/${IMEI}?from=${from}`).text();
+      const res = await api
+        .get(
+          `https://server.cruiser.gr:8443/Appoploo2/route/${IMEI}?from=${from}`
+        )
+        .text();
       const routes = polyline.decode(`${res}`);
       setRoutes(routes);
     }

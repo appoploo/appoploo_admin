@@ -15,8 +15,8 @@ import queryString from 'query-string';
 
 import AlignItemsList from '../../components/List';
 
-const URL = 'Appoploo2/notifications';
-const VESSELS_URL = '/Appoploo2/vessels';
+const URL = 'https://server.cruiser.gr:8443/Appoploo2/notifications';
+const VESSELS_URL = 'https://server.cruiser.gr:8443/Appoploo2/vessels';
 
 function AllVessels() {
   const t = useContext(I18n);

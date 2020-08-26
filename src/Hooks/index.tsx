@@ -46,7 +46,9 @@ function useApi() {
               'tenant-id': `${account.tenant}`
             } as Record<string, any>;
 
-            fetch('/Appoploo2/api/auth/token', { headers })
+            fetch('https://server.cruiser.gr:8443/Appoploo2/api/auth/token', {
+              headers
+            })
               .then((res) => res.json())
               .then((obj) => {
                 request.headers.set('X-Authorization', obj.token);

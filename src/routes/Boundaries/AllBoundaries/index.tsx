@@ -41,7 +41,9 @@ function AllBoundaries() {
 
   const getGeoObj = () =>
     api
-      .get('/Appoploo2/geoobjects?category=GEOFENCE_REGION')
+      .get(
+        'https://server.cruiser.gr:8443/Appoploo2/geoobjects?category=GEOFENCE_REGION'
+      )
       .json()
       .then((data) => setBoundaries(data))
       .catch(async (e) => console.log(await e.response.json()));
@@ -52,7 +54,9 @@ function AllBoundaries() {
 
   const deleteGeo = () => {
     api
-      .delete(`/Appoploo2/geoobjects/${deleteModal}`)
+      .delete(
+        `https://server.cruiser.gr:8443/Appoploo2/geoobjects/${deleteModal}`
+      )
       .then(() => {
         toast.success(t('boundaries-deleted-successfully'));
         getGeoObj();
@@ -62,7 +66,9 @@ function AllBoundaries() {
   };
   async function getboundaries() {
     try {
-      const res = await api.get('/Appoploo2/geoobjects');
+      const res = await api.get(
+        'https://server.cruiser.gr:8443/Appoploo2/geoobjects'
+      );
       const data = await res.json();
       setBoundaries(data);
     } catch (error) {

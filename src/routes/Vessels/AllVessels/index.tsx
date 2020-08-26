@@ -34,7 +34,7 @@ import queryString from 'query-string';
 import { subWeeks } from 'date-fns';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-const URL = '/Appoploo2/vessels';
+const URL = 'https://server.cruiser.gr:8443/Appoploo2/vessels';
 
 const marginRight = css`
   margin-right: 15px !important;
@@ -90,7 +90,9 @@ function AllVessels() {
   }
 
   const deleteVessel = useCallback(async () => {
-    await api.delete(`/Appoploo2/api/rest/vessels/${deleteModal}`);
+    await api.delete(
+      `https://server.cruiser.gr:8443/Appoploo2/api/rest/vessels/${deleteModal}`
+    );
     setDeleteModal(undefined);
     toast.success(t('int.vessel-delete-successfully'));
     await getVessels();

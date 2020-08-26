@@ -48,7 +48,7 @@ const Login = () => {
     (infos: { username: string; password: string }) => {
       setErr({});
 
-      return fetch('/Appoploo2/api/auth/login', {
+      return fetch('https://server.cruiser.gr:8443/Appoploo2/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

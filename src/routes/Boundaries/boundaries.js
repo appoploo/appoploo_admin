@@ -38,7 +38,7 @@ function Boundaries() {
   const save = () =>
     name &&
     api
-      .post('/Appoploo2/geoobjects/persist', {
+      .post('https://server.cruiser.gr:8443/Appoploo2/geoobjects/persist', {
         json: {
           id: id === 'new' ? null : id,
           name: name,
@@ -114,7 +114,7 @@ function Boundaries() {
   useEffect(() => {
     if (id === 'new') return;
     api
-      .get(`/Appoploo2/geoobjects/${id}`)
+      .get(`https://server.cruiser.gr:8443/Appoploo2/geoobjects/${id}`)
       .json()
       .then((res) => {
         setLatLngs(
