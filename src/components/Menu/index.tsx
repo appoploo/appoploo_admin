@@ -121,6 +121,7 @@ function Menu(props: Props) {
       <div className={classes.root}>
         <Profile />
         <Divider className={classes.divider} />
+        <span>v2.0.1</span>
         <List>
           {pages.map((page) => (
             <ListItem key={page.title} className={classes.item} disableGutters>

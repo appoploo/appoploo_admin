@@ -44,8 +44,8 @@ function Boundaries() {
           name: name,
           owner: 1,
           geometry: {
-            type: 'MultiPoint',
-            coordinates: latLngs.map((obj) => [obj.lng, obj.lat])
+            type: 'Polygon',
+            coordinates: [latLngs.map((obj) => [obj.lng, obj.lat])]
           },
           deleted: null,
           areaType: null,
