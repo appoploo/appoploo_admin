@@ -42,7 +42,8 @@ function Boundaries() {
         json: {
           id: id === 'new' ? null : id,
           name: name,
-          owner: 1,
+          // Dont ask
+          owner: '1',
           geometry: {
             type: 'Polygon',
             coordinates: [latLngs.map((obj) => [obj.lng, obj.lat])]
