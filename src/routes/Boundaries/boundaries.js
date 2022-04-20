@@ -118,7 +118,7 @@ function Boundaries() {
       .json()
       .then((res) => {
         setLatLngs(
-          res.geometry.coordinates.map((arr) => ({
+          res.geometry.coordinates[0].map((arr) => ({
             lat: arr[1],
             lng: arr[0]
           }))

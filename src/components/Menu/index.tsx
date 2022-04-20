@@ -14,7 +14,9 @@ import MapIcon from '@material-ui/icons/Map';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { subWeeks } from 'date-fns/esm';
 
+// @ts-ignore
 const defaultFrom = subWeeks(Date.now(), 4).getTime();
+// @ts-ignore
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
     height: 'calc(100% - 64px)',
@@ -121,7 +123,6 @@ function Menu(props: Props) {
       <div className={classes.root}>
         <Profile />
         <Divider className={classes.divider} />
-        <span>v2.0.1</span>
         <List>
           {pages.map((page) => (
             <ListItem key={page.title} className={classes.item} disableGutters>
@@ -138,6 +139,13 @@ function Menu(props: Props) {
           ))}
         </List>
       </div>
+
+      <span
+        style={{
+          textAlign: 'center'
+        }}>
+        v2.0.1
+      </span>
     </Drawer>
   );
 }
